@@ -22,7 +22,7 @@
 
     body { 
       font-family: 'Sarabun', sans-serif; 
-      background-color: #F4F7FB; 
+      background-color: #F4F6F4; 
       min-height: 100vh; 
       color: #2E3A59;
       font-size: 14px;
@@ -34,29 +34,49 @@
     /* Sidebar */
     .sidebar {
       width: 70px;
-      background: linear-gradient(180deg, #4A89C8 0%, #2E75B6 100%);
-      display: flex; flex-direction: column; align-items: center;
-      padding-top: 20px; gap: 10px;
-      position: fixed; height: 100vh;
+      background: linear-gradient(180deg, #0C6B63 0%, #085B54 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+      gap: 10px;
+      position: fixed;
+      height: 100vh;
       z-index: 10;
+      overflow: hidden;
+    }
+
+    .sidebar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 18px 18px;
+      opacity: 0.25;
+      pointer-events: none;
     }
 
     .sidebar-icon {
-      width: 50px; height: 50px;
-      display: flex; align-items: center; justify-content: center;
-      color: rgba(255,255,255,0.85);
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.92);
       font-size: 20px;
       border-radius: 12px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
       text-decoration: none;
       user-select: none;
       -webkit-tap-highlight-color: transparent;
+      position: relative;
+      z-index: 1;
     }
 
     .sidebar-icon:hover,
     .sidebar-icon.active {
-      background-color: rgba(255,255,255,0.18);
+      background-color: rgba(255,255,255,0.14);
       color: #fff;
     }
 
@@ -64,35 +84,256 @@
 
     .main-content { flex: 1; padding: 0; margin-left: 70px; }
 
-    /* ✅ HEADER STANDARD */
-    .header {
-      background: linear-gradient(135deg, #4A89C8 0%, #2E75B6 100%);
-      padding: 60px 40px;
+    /* HERO */
+    .hero-section {
+      position: relative;
       min-height: 240px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(74, 137, 200, 0.25);
-
+      padding: 60px 40px;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(180deg, #F4FBF7 0%, #ECF7F1 55%, #E4F2EA 100%);
+      box-shadow: 0 4px 15px rgba(55, 110, 95, 0.05);
+      isolation: isolate;
     }
 
-    .header h1 {
-      font-size: 42px; 
-      font-weight: 700; 
-      color: #ffffff;
-      margin-bottom: 15px;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(920px 220px at 14% -30%, rgba(116,198,157,0.22) 0%, rgba(116,198,157,0.10) 36%, transparent 37%),
+        radial-gradient(760px 170px at 75% -28%, rgba(181,227,209,0.22) 0%, rgba(181,227,209,0.10) 35%, transparent 36%),
+        radial-gradient(600px 130px at 20% 100%, rgba(181,227,209,0.22) 0%, rgba(181,227,209,0.08) 48%, transparent 49%),
+        radial-gradient(560px 125px at 92% 100%, rgba(118,194,168,0.18) 0%, rgba(118,194,168,0.08) 48%, transparent 49%);
+      z-index: 0;
+      pointer-events: none;
     }
 
-    .header .subtitle {
-      font-size: 18px; 
-      color: rgba(255, 255, 255, 0.95);
-      max-width: 650px; 
-      margin: 0 auto; 
+    .hero-top-lines {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 300px;
+      height: 72px;
+      background:
+        repeating-linear-gradient(
+          -18deg,
+          rgba(116,198,157,0.10) 0px,
+          rgba(116,198,157,0.10) 1px,
+          transparent 1px,
+          transparent 9px
+        );
+      opacity: 0.5;
+      border-radius: 0 0 110px 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-dots-left {
+      position: absolute;
+      left: 92px;
+      top: 74px;
+      width: 88px;
+      height: 88px;
+      background-image: radial-gradient(circle, rgba(45,106,79,0.18) 1.4px, transparent 1.4px);
+      background-size: 14px 14px;
+      opacity: 0.55;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-geo-right {
+      position: absolute;
+      top: 24px;
+      right: 88px;
+      width: 150px;
+      height: 60px;
+      opacity: 0.34;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-geo-right span {
+      position: absolute;
+      width: 18px;
+      height: 10px;
+      border-top: 2px solid rgba(109,183,157,0.34);
+      border-bottom: 2px solid rgba(109,183,157,0.34);
+    }
+
+    .hero-geo-right span:nth-child(1) { top: 0; left: 0; }
+    .hero-geo-right span:nth-child(2) { top: 8px; left: 22px; }
+    .hero-geo-right span:nth-child(3) { top: 0; left: 44px; }
+    .hero-geo-right span:nth-child(4) { top: 16px; left: 0; }
+    .hero-geo-right span:nth-child(5) { top: 24px; left: 22px; }
+    .hero-geo-right span:nth-child(6) { top: 16px; left: 44px; }
+    .hero-geo-right span:nth-child(7) { top: 0; left: 88px; }
+    .hero-geo-right span:nth-child(8) { top: 16px; left: 88px; }
+
+    .hero-leaf-left,
+    .hero-leaf-right {
+      position: absolute;
+      width: 62px;
+      height: 108px;
+      opacity: 0.24;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-leaf-left {
+      left: 118px;
+      bottom: 12px;
+      transform: rotate(-10deg);
+    }
+
+    .hero-leaf-right {
+      right: 82px;
+      bottom: 14px;
+      transform: rotate(10deg);
+    }
+
+    .hero-leaf-left::after,
+    .hero-leaf-right::after {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 90px;
+      background: rgba(109,183,157,0.22);
+      left: 28px;
+      top: 10px;
+    }
+
+    .hero-leaf-left span,
+    .hero-leaf-right span {
+      position: absolute;
+      display: block;
+      width: 24px;
+      height: 12px;
+      background: linear-gradient(135deg, rgba(135,206,179,0.58), rgba(135,206,179,0.18));
+      border-radius: 100% 0 100% 0;
+    }
+
+    .hero-leaf-left span:nth-child(1) { left: 2px; top: 54px; transform: rotate(-45deg); }
+    .hero-leaf-left span:nth-child(2) { left: 10px; top: 34px; transform: rotate(-12deg); }
+    .hero-leaf-left span:nth-child(3) { left: 18px; top: 14px; transform: rotate(18deg); }
+
+    .hero-leaf-right span:nth-child(1) { right: 2px; top: 54px; transform: rotate(45deg); }
+    .hero-leaf-right span:nth-child(2) { right: 10px; top: 34px; transform: rotate(12deg); }
+    .hero-leaf-right span:nth-child(3) { right: 18px; top: 14px; transform: rotate(-18deg); }
+
+    .hero-bottom-lines {
+      position: absolute;
+      right: -8px;
+      bottom: 0;
+      width: 290px;
+      height: 88px;
+      background:
+        repeating-linear-gradient(
+          -26deg,
+          rgba(109,183,157,0.08) 0px,
+          rgba(109,183,157,0.08) 1px,
+          transparent 1px,
+          transparent 10px
+        );
+      opacity: 0.34;
+      border-radius: 90px 0 0 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-bottom-glow {
+      position: absolute;
+      left: 50%;
+      bottom: -34px;
+      transform: translateX(-50%);
+      width: 420px;
+      height: 90px;
+      background: radial-gradient(ellipse at center, rgba(181,227,209,0.18) 0%, rgba(181,227,209,0.08) 45%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-stars::before,
+    .hero-stars::after {
+      content: "✦";
+      position: absolute;
+      color: rgba(82,183,136,0.28);
+      font-size: 11px;
+      z-index: 1;
+    }
+
+    .hero-stars::before {
+      left: 330px;
+      top: 32px;
+    }
+
+    .hero-stars::after {
+      right: 360px;
+      top: 34px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: 42px;
+      font-weight: 700;
+      color: #0c7468;
+      margin: 0 0 10px 0;
+      letter-spacing: 0.25px;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: #5e6e80;
+      margin: 6px 0 0 0;
+      font-weight: 400;
       line-height: 1.7;
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 10px 0 8px;
+    }
+
+    .div-line {
+      display: block;
+      width: 86px;
+      height: 2px;
+      background: rgba(12,116,104,0.32);
+      border-radius: 2px;
+    }
+
+    .div-icon {
+      font-size: 18px;
+      line-height: 1;
+      color: #2a9d8f;
+    }
+
+    .wave-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      line-height: 0;
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    .wave-bottom svg {
+      width: 100%;
+      height: 54px;
+      display: block;
     }
 
     /* Menu Cards */
@@ -104,36 +345,49 @@
     }
 
     .card {
+      position: relative;
+      overflow: hidden;
       background: #ffffff;
       border-radius: 16px;
       padding: 28px 20px;
       text-align: center;
       text-decoration: none;
-      box-shadow: 0 4px 15px rgba(46,58,89,0.08);
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
+      box-shadow: 0 4px 15px rgba(46,58,89,0.06);
+      transition: all 0.25s ease;
+      border: 1px solid rgba(160, 206, 190, 0.15);
+      isolation: isolate;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(74,137,200,0.18);
-      border-color: #4A89C8;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(79, 160, 138, 0.12);
+      border-color: rgba(160, 206, 190, 0.38);
+    }
+
+    .card-icon,
+    .card-title,
+    .card-desc {
+      position: relative;
+      z-index: 2;
     }
 
     .card-icon {
-      width: 60px; height: 60px;
+      width: 60px;
+      height: 60px;
       margin: 0 auto 15px;
-      background: linear-gradient(135deg, #E6F0FA 0%, #DCEAF8 100%);
+      background: linear-gradient(135deg, #EEF7F1 0%, #E7F2EC 100%);
       border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 26px; 
-      color: #4A89C8;
+      color: #0D6B63;
     }
 
     .card-title { 
       font-size: 18px; 
       font-weight: 600; 
-      color: #2E3A59; 
+      color: #23453F; 
       margin-bottom: 8px; 
     }
 
@@ -143,25 +397,135 @@
       line-height: 1.5; 
     }
 
-    /* ✅ New Employee (เอาเขียวออก -> ฟ้าเดียวกับธีม) */
+    /* Decorative system for cards: one main accent per card */
+    .card-dots {
+      position: absolute;
+      width: 84px;
+      height: 84px;
+      background-image: radial-gradient(circle, rgba(109, 183, 157, 0.22) 1.4px, transparent 1.4px);
+      background-size: 12px 12px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card-wave {
+      position: absolute;
+      right: -18px;
+      bottom: -18px;
+      width: 165px;
+      height: 92px;
+      background: radial-gradient(ellipse at bottom right, rgba(176, 220, 203, 0.22) 0%, rgba(176, 220, 203, 0.08) 48%, rgba(176, 220, 203, 0) 49%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card-leaf {
+      position: absolute;
+      width: 42px;
+      height: 72px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.28;
+    }
+
+    .card-leaf::after {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 54px;
+      background: rgba(107, 177, 152, 0.20);
+      left: 16px;
+      top: 8px;
+    }
+
+    .card-leaf span {
+      position: absolute;
+      width: 18px;
+      height: 9px;
+      background: linear-gradient(135deg, rgba(123, 197, 170, 0.54), rgba(123, 197, 170, 0.16));
+      border-radius: 100% 0 100% 0;
+      display: block;
+    }
+
+    .card-leaf.right span:nth-child(1) { right: 0; top: 34px; transform: rotate(45deg); }
+    .card-leaf.right span:nth-child(2) { right: 7px; top: 20px; transform: rotate(12deg); }
+    .card-leaf.right span:nth-child(3) { right: 14px; top: 8px; transform: rotate(-15deg); }
+
+    .card-geo {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      width: 86px;
+      height: 42px;
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card-geo span {
+      position: absolute;
+      width: 16px;
+      height: 9px;
+      border-top: 2px solid rgba(109,183,157,0.28);
+      border-bottom: 2px solid rgba(109,183,157,0.28);
+    }
+
+    .card-geo span:nth-child(1) { top: 0; left: 0; }
+    .card-geo span:nth-child(2) { top: 8px; left: 18px; }
+    .card-geo span:nth-child(3) { top: 0; left: 36px; }
+    .card-geo span:nth-child(4) { top: 16px; left: 0; }
+    .card-geo span:nth-child(5) { top: 24px; left: 18px; }
+    .card-geo span:nth-child(6) { top: 16px; left: 36px; }
+
+    .kb .card-dots { left: 18px; top: 18px; }
+    .kb .card-wave { right: -10px; bottom: -14px; }
+
+    .lp .card-geo { right: 20px; top: 16px; }
+    .lp .card-wave { right: -10px; bottom: -14px; }
+
+    .quiz .card-dots { left: 18px; top: 18px; opacity: 0.18; }
+    .quiz .card-wave { right: -10px; bottom: -14px; }
+
+    .share .card-dots { right: 18px; top: 18px; }
+    .share .card-leaf { right: 28px; bottom: 12px; }
+    .share .card-wave { right: -10px; bottom: -14px; }
+
+    /* New Employee */
     .new-employee {
+      position: relative;
+      overflow: hidden;
       background: #ffffff;
       border-radius: 16px;
       padding: 22px 28px;
       margin: 0 40px 20px 40px;
-      box-shadow: 0 4px 15px rgba(46,58,89,0.08);
-      border-left: 6px solid #4A89C8; /* ✅ จากเขียว -> ฟ้า */
+      box-shadow: 0 4px 15px rgba(46,58,89,0.06);
+      border-left: 6px solid #0D6B63;
+    }
+
+    .new-employee::after {
+      content: "";
+      position: absolute;
+      top: 20px;
+      right: 18px;
+      width: 82px;
+      height: 48px;
+      background-image: radial-gradient(circle, rgba(109, 183, 157, 0.18) 1.5px, transparent 1.5px);
+      background-size: 12px 12px;
+      opacity: 0.45;
+      pointer-events: none;
     }
 
     .new-employee h3 { 
       font-size: 18px; 
       font-weight: 600; 
-      color: #2E3A59; 
+      color: #23453F; 
       margin-bottom: 12px; 
+      position: relative;
+      z-index: 1;
     }
 
     .new-employee h3 i { 
-      color: #4A89C8;  /* ✅ จากเขียว -> ฟ้า */
+      color: #0D6B63;
       margin-right: 10px; 
     }
 
@@ -170,10 +534,12 @@
       color: #2E3A59; 
       line-height: 1.9; 
       font-size: 14px; 
+      position: relative;
+      z-index: 1;
     }
 
     .new-employee strong { 
-      color: #4A89C8; 
+      color: #0D6B63; 
     }
 
     .footer { 
@@ -185,6 +551,7 @@
 
     @media (max-width: 768px) {
       .container { flex-direction: column; }
+
       .sidebar {
         width: 100%;
         height: 60px;
@@ -194,13 +561,35 @@
         position: sticky;
         top: 0;
       }
-      .main-content { margin-left: 0; }
-      .menu-cards { grid-template-columns: 1fr; padding: 20px; }
-      .new-employee { margin: 0 20px 20px 20px; }
 
-      .header { padding: 40px 20px; min-height: 170px; }
-      .header h1 { font-size: 28px; }
-      .header .subtitle { font-size: 15px; }
+      .main-content { margin-left: 0; }
+
+      .hero-section {
+        min-height: 170px;
+        padding: 40px 20px;
+      }
+
+      .hero-title { font-size: 28px; }
+      .hero-subtitle { font-size: 15px; }
+
+      .hero-top-lines,
+      .hero-dots-left,
+      .hero-geo-right,
+      .hero-leaf-left,
+      .hero-leaf-right,
+      .hero-bottom-lines,
+      .hero-bottom-glow {
+        opacity: 0.18;
+      }
+
+      .menu-cards {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+
+      .new-employee {
+        margin: 0 20px 20px 20px;
+      }
     }
   </style>
 </head>
@@ -217,31 +606,82 @@
     </nav>
 
     <main class="main-content">
-      <header class="header">
-        <h1>Knowledge Management System</h1>
-        <p class="subtitle">ศูนย์รวมความรู้ เทคนิค และจุดสำคัญในการผลิต</p>
+      <header class="hero-section">
+        <div class="hero-top-lines"></div>
+        <div class="hero-dots-left"></div>
+
+        <div class="hero-geo-right">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="hero-leaf-left">
+          <span></span><span></span><span></span>
+        </div>
+
+        <div class="hero-leaf-right">
+          <span></span><span></span><span></span>
+        </div>
+
+        <div class="hero-bottom-lines"></div>
+        <div class="hero-bottom-glow"></div>
+        <div class="hero-stars"></div>
+
+        <div class="hero-content">
+          <h1 class="hero-title">Knowledge Management System</h1>
+
+          <div class="hero-divider">
+            <span class="div-line"></span>
+            <span class="div-icon"><i class="fas fa-seedling"></i></span>
+            <span class="div-line"></span>
+          </div>
+
+          <p class="hero-subtitle">ศูนย์รวมความรู้ เทคนิค และจุดสำคัญในการผลิต</p>
+        </div>
+
+        <div class="wave-bottom">
+          <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path d="M0,40 C360,80 720,0 1080,50 C1260,75 1380,60 1440,40 L1440,80 L0,80 Z" fill="#f4f6f4"/>
+          </svg>
+        </div>
       </header>
 
       <section class="menu-cards">
-        <a href="knowledge-base.html" class="card">
+        <a href="knowledge-base.html" class="card kb">
+          <div class="card-dots"></div>
+          <div class="card-wave"></div>
+
           <div class="card-icon"><i class="fas fa-book-open"></i></div>
           <h2 class="card-title">Knowledge Base</h2>
           <p class="card-desc">ค้นหาความรู้ เทคนิค และวิธีแก้ปัญหา</p>
         </a>
 
-        <a href="learning-path.html" class="card">
+        <a href="learning-path.html" class="card lp">
+          <div class="card-geo">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+          </div>
+          <div class="card-wave"></div>
+
           <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
           <h2 class="card-title">Learning Path</h2>
           <p class="card-desc">เรียนรู้กระบวนการผลิตและจุดสำคัญ</p>
         </a>
 
-        <a href="quiz.html" class="card">
+        <a href="quiz.html" class="card quiz">
+          <div class="card-dots"></div>
+          <div class="card-wave"></div>
+
           <div class="card-icon"><i class="fas fa-clipboard-check"></i></div>
           <h2 class="card-title">Quiz / Check Point</h2>
           <p class="card-desc">ตรวจสอบความเข้าใจในจุดสำคัญ</p>
         </a>
 
-        <a href="share-experience.html" class="card">
+        <a href="share-experience.html" class="card share">
+          <div class="card-dots"></div>
+          <div class="card-wave"></div>
+          <div class="card-leaf right"><span></span><span></span><span></span></div>
+
           <div class="card-icon"><i class="fas fa-comments"></i></div>
           <h2 class="card-title">Share Experience</h2>
           <p class="card-desc">แชร์ประสบการณ์และวิธีแก้ปัญหา</p>
