@@ -22,7 +22,7 @@
 
     body { 
       font-family: 'Sarabun', sans-serif; 
-      background-color: #F4F6F4; 
+      background-color: #F4F7FB; 
       min-height: 100vh; 
       color: #2E3A59;
       font-size: 14px;
@@ -34,54 +34,17 @@
     /* Sidebar */
     .sidebar {
       width: 70px;
-      background: linear-gradient(180deg, #0C6B63 0%, #085B54 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 20px;
-      gap: 10px;
-      position: fixed;
-      height: 100vh;
+      background: linear-gradient(180deg, #4A89C8 0%, #2E75B6 100%);
+      display: flex; flex-direction: column; align-items: center;
+      padding-top: 20px; gap: 10px;
+      position: fixed; height: 100vh;
       z-index: 10;
-      overflow: hidden;
-    }
-
-    .sidebar::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
-      background-size: 16px 16px;
-      opacity: 0.35;
-      pointer-events: none;
-    }
-
-    .sidebar::after {
-      content: "";
-      position: absolute;
-      left: -15px;
-      bottom: -10px;
-      width: 110px;
-      height: 180px;
-      background:
-        repeating-linear-gradient(
-          -20deg,
-          rgba(255,255,255,0.05) 0px,
-          rgba(255,255,255,0.05) 1px,
-          transparent 1px,
-          transparent 10px
-        );
-      opacity: 0.35;
-      pointer-events: none;
     }
 
     .sidebar-icon {
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.9);
+      width: 50px; height: 50px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.85);
       font-size: 20px;
       border-radius: 12px;
       cursor: pointer;
@@ -89,13 +52,11 @@
       text-decoration: none;
       user-select: none;
       -webkit-tap-highlight-color: transparent;
-      position: relative;
-      z-index: 1;
     }
 
     .sidebar-icon:hover,
     .sidebar-icon.active {
-      background-color: rgba(255,255,255,0.16);
+      background-color: rgba(255,255,255,0.18);
       color: #fff;
     }
 
@@ -103,200 +64,35 @@
 
     .main-content { flex: 1; padding: 0; margin-left: 70px; }
 
-    /* HEADER / HERO */
-    .header.hero-section {
-      position: relative;
-      min-height: 240px;
+    /* ✅ HEADER STANDARD */
+    .header {
+      background: linear-gradient(135deg, #4A89C8 0%, #2E75B6 100%);
       padding: 60px 40px;
-      background: linear-gradient(
-        135deg,
-        #f4fbf7 0%,
-        #edf7f1 35%,
-        #dcefe4 70%,
-        #c8e6d3 100%
-      );
-      overflow: hidden;
+      min-height: 240px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(74, 137, 200, 0.25);
+
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(55, 110, 95, 0.05);
-      isolation: isolate;
+      align-items: center;
     }
 
-    .hero-content {
-      position: relative;
-      z-index: 10;
-      text-align: center;
+    .header h1 {
+      font-size: 42px; 
+      font-weight: 700; 
+      color: #ffffff;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
 
-    .hero-title {
-      font-size: 42px;
-      font-weight: 700;
-      color: #0c7468;
-      margin-bottom: 12px;
-      letter-spacing: 0.4px;
-      text-shadow: none;
-    }
-
-    .hero-subtitle {
-      font-size: 18px;
-      color: #5e6e80;
-      margin-top: 8px;
-      font-weight: 400;
+    .header .subtitle {
+      font-size: 18px; 
+      color: rgba(255, 255, 255, 0.95);
+      max-width: 650px; 
+      margin: 0 auto; 
       line-height: 1.7;
-    }
-
-    .hero-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin: 10px 0;
-    }
-
-    .divider-line {
-      display: block;
-      width: 86px;
-      height: 2px;
-      background-color: rgba(12, 116, 104, 0.32);
-      border-radius: 2px;
-    }
-
-    .divider-icon {
-      font-size: 18px;
-      color: #2a9d8f;
-      line-height: 1;
-    }
-
-    .leaf-left {
-      position: absolute;
-      left: 70px;
-      bottom: 6px;
-      width: 120px;
-      opacity: 0.45;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .leaf-left svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .leaf-right {
-      position: absolute;
-      right: 72px;
-      bottom: 10px;
-      width: 90px;
-      opacity: 0.42;
-      z-index: 2;
-      transform: rotate(18deg);
-      pointer-events: none;
-    }
-
-    .leaf-right svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .geo-right {
-      position: absolute;
-      right: 78px;
-      top: 18px;
-      width: 170px;
-      opacity: 0.5;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .geo-right svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .dot-pattern {
-      position: absolute;
-      left: 92px;
-      top: 70px;
-      width: 88px;
-      height: 88px;
-      background-image: radial-gradient(circle, rgba(45, 106, 79, 0.22) 1.5px, transparent 1.5px);
-      background-size: 14px 14px;
-      opacity: 0.45;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .header.hero-section::before {
-      content: "";
-      position: absolute;
-      left: -10px;
-      top: -8px;
-      width: 330px;
-      height: 90px;
-      background:
-        repeating-linear-gradient(
-          -18deg,
-          rgba(116, 198, 157, 0.14) 0px,
-          rgba(116, 198, 157, 0.14) 1px,
-          transparent 1px,
-          transparent 8px
-        );
-      opacity: 0.4;
-      z-index: 1;
-      border-radius: 0 0 120px 0;
-      pointer-events: none;
-    }
-
-    .header.hero-section::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(900px 220px at 12% -30%, rgba(116, 198, 157, 0.26) 0%, rgba(116, 198, 157, 0.10) 34%, transparent 35%),
-        radial-gradient(760px 180px at 22% -28%, rgba(181, 227, 209, 0.18) 0%, rgba(181, 227, 209, 0.08) 36%, transparent 37%),
-        radial-gradient(520px 120px at 28% 100%, rgba(181, 227, 209, 0.24) 0%, rgba(181, 227, 209, 0.10) 48%, transparent 49%),
-        radial-gradient(560px 130px at 94% 100%, rgba(118, 194, 168, 0.22) 0%, rgba(118, 194, 168, 0.10) 48%, transparent 49%);
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .wave-bottom {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      line-height: 0;
-      z-index: 5;
-      pointer-events: none;
-    }
-
-    .wave-bottom svg {
-      width: 100%;
-      height: 60px;
-      display: block;
-    }
-
-    .hero-section .hero-content::before,
-    .hero-section .hero-content::after {
-      content: "✦";
-      position: absolute;
-      color: rgba(82, 183, 136, 0.35);
-      font-size: 12px;
-    }
-
-    .hero-section .hero-content::before {
-      left: -120px;
-      top: 0;
-    }
-
-    .hero-section .hero-content::after {
-      right: -120px;
-      top: 16px;
     }
 
     /* Menu Cards */
@@ -308,49 +104,36 @@
     }
 
     .card {
-      position: relative;
-      overflow: hidden;
       background: #ffffff;
       border-radius: 16px;
       padding: 28px 20px;
       text-align: center;
       text-decoration: none;
-      box-shadow: 0 4px 15px rgba(46,58,89,0.06);
+      box-shadow: 0 4px 15px rgba(46,58,89,0.08);
       transition: all 0.3s ease;
       border: 2px solid transparent;
-      isolation: isolate;
     }
 
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(79, 160, 138, 0.14);
-      border-color: #B8DED0;
-    }
-
-    .card-icon,
-    .card-title,
-    .card-desc {
-      position: relative;
-      z-index: 2;
+      box-shadow: 0 8px 25px rgba(74,137,200,0.18);
+      border-color: #4A89C8;
     }
 
     .card-icon {
-      width: 60px;
-      height: 60px;
+      width: 60px; height: 60px;
       margin: 0 auto 15px;
-      background: linear-gradient(135deg, #EEF7F1 0%, #E7F2EC 100%);
+      background: linear-gradient(135deg, #E6F0FA 0%, #DCEAF8 100%);
       border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 26px; 
-      color: #0D6B63;
+      color: #4A89C8;
     }
 
     .card-title { 
       font-size: 18px; 
       font-weight: 600; 
-      color: #23453F; 
+      color: #2E3A59; 
       margin-bottom: 8px; 
     }
 
@@ -360,155 +143,25 @@
       line-height: 1.5; 
     }
 
-    .card-dots {
-      position: absolute;
-      width: 84px;
-      height: 84px;
-      background-image: radial-gradient(circle, rgba(109, 183, 157, 0.28) 1.5px, transparent 1.5px);
-      background-size: 12px 12px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .card-wave {
-      position: absolute;
-      right: -18px;
-      bottom: -20px;
-      width: 170px;
-      height: 95px;
-      background: radial-gradient(ellipse at bottom right, rgba(176, 220, 203, 0.32) 0%, rgba(176, 220, 203, 0.16) 48%, rgba(176, 220, 203, 0) 49%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .card-leaf {
-      position: absolute;
-      width: 48px;
-      height: 76px;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.48;
-    }
-
-    .card-leaf::after {
-      content: "";
-      position: absolute;
-      width: 2px;
-      height: 58px;
-      background: rgba(107, 177, 152, 0.26);
-      left: 18px;
-      top: 8px;
-    }
-
-    .card-leaf span {
-      position: absolute;
-      width: 20px;
-      height: 10px;
-      background: linear-gradient(135deg, rgba(123, 197, 170, 0.68), rgba(123, 197, 170, 0.25));
-      border-radius: 100% 0 100% 0;
-      display: block;
-    }
-
-    .card-leaf.left span:nth-child(1) { left: 0; top: 36px; transform: rotate(-45deg); }
-    .card-leaf.left span:nth-child(2) { left: 8px; top: 22px; transform: rotate(-12deg); }
-    .card-leaf.left span:nth-child(3) { left: 16px; top: 8px; transform: rotate(15deg); }
-
-    .card-leaf.right span:nth-child(1) { right: 0; top: 36px; transform: rotate(45deg); }
-    .card-leaf.right span:nth-child(2) { right: 8px; top: 22px; transform: rotate(12deg); }
-    .card-leaf.right span:nth-child(3) { right: 16px; top: 8px; transform: rotate(-15deg); }
-
-    .card-hex {
-      position: absolute;
-      width: 110px;
-      height: 68px;
-      right: 18px;
-      top: 18px;
-      pointer-events: none;
-      opacity: 0.28;
-      z-index: 0;
-    }
-
-    .hex {
-      position: absolute;
-      width: 30px;
-      height: 17px;
-      border-top: 2px solid rgba(109, 183, 157, 0.40);
-      border-bottom: 2px solid rgba(109, 183, 157, 0.40);
-    }
-
-    .hex::before,
-    .hex::after {
-      content: "";
-      position: absolute;
-      width: 21px;
-      height: 21px;
-      border-top: 2px solid rgba(109, 183, 157, 0.40);
-      border-right: 2px solid rgba(109, 183, 157, 0.40);
-      transform: scaleY(0.58) rotate(-45deg);
-      background: transparent;
-      left: 3px;
-    }
-
-    .hex::before { top: -12px; }
-    .hex::after { bottom: -12px; }
-
-    .hx1 { top: 10px; left: 0; }
-    .hx2 { top: 0; left: 52px; }
-    .hx3 { top: 15px; left: 104px; }
-    .hx4 { top: 36px; left: 28px; }
-    .hx5 { top: 36px; left: 82px; }
-    .hx6 { top: 12px; left: 156px; }
-
-    .kb .card-dots { left: 18px; top: 18px; }
-    .kb .card-wave { right: -10px; bottom: -14px; }
-    .kb .card-leaf { right: 28px; bottom: 8px; }
-
-    .lp .card-hex { right: 20px; top: 16px; }
-    .lp .card-wave { right: -10px; bottom: -14px; }
-
-    .quiz .card-dots { left: 18px; top: 18px; opacity: 0.22; }
-    .quiz .card-wave { right: -10px; bottom: -14px; }
-
-    .share .card-dots { right: 18px; top: 18px; }
-    .share .card-wave { right: -10px; bottom: -14px; }
-    .share .card-leaf { right: 28px; bottom: 8px; }
-
-    /* New Employee */
+    /* ✅ New Employee (เอาเขียวออก -> ฟ้าเดียวกับธีม) */
     .new-employee {
-      position: relative;
-      overflow: hidden;
       background: #ffffff;
       border-radius: 16px;
       padding: 22px 28px;
       margin: 0 40px 20px 40px;
-      box-shadow: 0 4px 15px rgba(46,58,89,0.06);
-      border-left: 6px solid #0D6B63;
-    }
-
-    .new-employee::after {
-      content: "";
-      position: absolute;
-      top: 20px;
-      right: 18px;
-      width: 86px;
-      height: 52px;
-      background-image: radial-gradient(circle, rgba(109, 183, 157, 0.24) 1.5px, transparent 1.5px);
-      background-size: 12px 12px;
-      opacity: 0.5;
-      pointer-events: none;
+      box-shadow: 0 4px 15px rgba(46,58,89,0.08);
+      border-left: 6px solid #4A89C8; /* ✅ จากเขียว -> ฟ้า */
     }
 
     .new-employee h3 { 
       font-size: 18px; 
       font-weight: 600; 
-      color: #23453F; 
+      color: #2E3A59; 
       margin-bottom: 12px; 
-      position: relative;
-      z-index: 1;
     }
 
     .new-employee h3 i { 
-      color: #0D6B63;
+      color: #4A89C8;  /* ✅ จากเขียว -> ฟ้า */
       margin-right: 10px; 
     }
 
@@ -517,12 +170,10 @@
       color: #2E3A59; 
       line-height: 1.9; 
       font-size: 14px; 
-      position: relative;
-      z-index: 1;
     }
 
     .new-employee strong { 
-      color: #0D6B63; 
+      color: #4A89C8; 
     }
 
     .footer { 
@@ -547,21 +198,9 @@
       .menu-cards { grid-template-columns: 1fr; padding: 20px; }
       .new-employee { margin: 0 20px 20px 20px; }
 
-      .header.hero-section {
-        min-height: 170px;
-        padding: 40px 20px;
-      }
-
-      .hero-title { font-size: 28px; }
-      .hero-subtitle { font-size: 15px; }
-
-      .leaf-left,
-      .leaf-right,
-      .geo-right,
-      .dot-pattern,
-      .wave-bottom {
-        opacity: 0.2;
-      }
+      .header { padding: 40px 20px; min-height: 170px; }
+      .header h1 { font-size: 28px; }
+      .header .subtitle { font-size: 15px; }
     }
   </style>
 </head>
@@ -578,99 +217,31 @@
     </nav>
 
     <main class="main-content">
-      <header class="header hero-section">
-        <div class="leaf-left">
-          <svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20,280 C20,280 -30,150 80,80 C140,40 180,20 190,10 
-                     C190,10 160,60 120,120 C80,180 60,240 20,280Z" 
-                  fill="#74c69d" opacity="0.6"/>
-            <path d="M40,290 C40,290 0,180 90,110 C130,80 160,50 170,30
-                     C170,30 150,80 110,140 C70,200 50,260 40,290Z" 
-                  fill="#52b788" opacity="0.4"/>
-          </svg>
-        </div>
-
-        <div class="geo-right">
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="50,10 90,10 110,45 90,80 50,80 30,45" 
-                     fill="none" stroke="#74c69d" stroke-width="2" opacity="0.5"/>
-            <polygon points="100,50 130,50 145,75 130,100 100,100 85,75" 
-                     fill="none" stroke="#52b788" stroke-width="1.5" opacity="0.4"/>
-            <polygon points="30,90 55,90 67,112 55,134 30,134 18,112" 
-                     fill="none" stroke="#74c69d" stroke-width="1" opacity="0.3"/>
-            <circle cx="160" cy="30" r="15" 
-                    fill="none" stroke="#74c69d" stroke-width="1.5" opacity="0.4"/>
-          </svg>
-        </div>
-
-        <div class="leaf-right">
-          <svg viewBox="0 0 150 200" xmlns="http://www.w3.org/2000/svg">
-            <path d="M130,10 C130,10 160,80 100,140 C60,180 20,190 10,195
-                     C10,195 50,160 80,110 C110,60 120,30 130,10Z" 
-                  fill="#74c69d" opacity="0.5"/>
-          </svg>
-        </div>
-
-        <div class="dot-pattern"></div>
-
-        <div class="hero-content">
-          <h1 class="hero-title">Knowledge Management System</h1>
-
-          <div class="hero-divider">
-            <span class="divider-line"></span>
-            <span class="divider-icon"><i class="fas fa-seedling"></i></span>
-            <span class="divider-line"></span>
-          </div>
-
-          <p class="hero-subtitle">ศูนย์รวมความรู้ เทคนิค และจุดสำคัญในการผลิต</p>
-        </div>
-
-        <div class="wave-bottom">
-          <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0,40 C360,80 720,0 1080,50 C1260,75 1380,60 1440,40 L1440,80 L0,80 Z" fill="#f4f6f4"/>
-          </svg>
-        </div>
+      <header class="header">
+        <h1>Knowledge Management System</h1>
+        <p class="subtitle">ศูนย์รวมความรู้ เทคนิค และจุดสำคัญในการผลิต</p>
       </header>
 
       <section class="menu-cards">
-        <a href="knowledge-base.html" class="card kb">
-          <div class="card-dots"></div>
-          <div class="card-wave"></div>
-          <div class="card-leaf right"><span></span><span></span><span></span></div>
-
+        <a href="knowledge-base.html" class="card">
           <div class="card-icon"><i class="fas fa-book-open"></i></div>
           <h2 class="card-title">Knowledge Base</h2>
           <p class="card-desc">ค้นหาความรู้ เทคนิค และวิธีแก้ปัญหา</p>
         </a>
 
-        <a href="learning-path.html" class="card lp">
-          <div class="card-hex">
-            <span class="hex hx1"></span>
-            <span class="hex hx2"></span>
-            <span class="hex hx4"></span>
-            <span class="hex hx5"></span>
-          </div>
-          <div class="card-wave"></div>
-
+        <a href="learning-path.html" class="card">
           <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
           <h2 class="card-title">Learning Path</h2>
           <p class="card-desc">เรียนรู้กระบวนการผลิตและจุดสำคัญ</p>
         </a>
 
-        <a href="quiz.html" class="card quiz">
-          <div class="card-dots"></div>
-          <div class="card-wave"></div>
-
+        <a href="quiz.html" class="card">
           <div class="card-icon"><i class="fas fa-clipboard-check"></i></div>
           <h2 class="card-title">Quiz / Check Point</h2>
           <p class="card-desc">ตรวจสอบความเข้าใจในจุดสำคัญ</p>
         </a>
 
-        <a href="share-experience.html" class="card share">
-          <div class="card-dots"></div>
-          <div class="card-wave"></div>
-          <div class="card-leaf right"><span></span><span></span><span></span></div>
-
+        <a href="share-experience.html" class="card">
           <div class="card-icon"><i class="fas fa-comments"></i></div>
           <h2 class="card-title">Share Experience</h2>
           <p class="card-desc">แชร์ประสบการณ์และวิธีแก้ปัญหา</p>
