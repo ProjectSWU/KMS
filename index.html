@@ -29,21 +29,12 @@
       line-height: 1.7;
     }
 
-    a {
-      color: #0172b4;
-      text-decoration: none;
-    }
-
-    a:visited {
-      color: #0172b4;
-    }
-
     .container { display: flex; min-height: 100vh; }
 
     /* Sidebar */
     .sidebar {
       width: 70px;
-      background-color: #0172b4;
+      background: linear-gradient(180deg, #4A89C8 0%, #2E75B6 100%);
       display: flex; flex-direction: column; align-items: center;
       padding-top: 20px; gap: 10px;
       position: fixed; height: 100vh;
@@ -53,42 +44,58 @@
     .sidebar-icon {
       width: 50px; height: 50px;
       display: flex; align-items: center; justify-content: center;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.85);
       font-size: 20px;
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
+      text-decoration: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .sidebar-icon:hover,
     .sidebar-icon.active {
-      background-color: #f5df4e;
-      color: #0172b4;
+      background-color: rgba(255,255,255,0.18);
+      color: #fff;
     }
+
+    .sidebar-icon:active { transform: scale(0.96); }
 
     .main-content { flex: 1; padding: 0; margin-left: 70px; }
 
-    /* HEADER */
+    /* ✅ HEADER STANDARD */
     .header {
-      background-color: #a1dba9;
+      background: linear-gradient(135deg, #4A89C8 0%, #2E75B6 100%);
       padding: 60px 40px;
       min-height: 240px;
       text-align: center;
+      box-shadow: 0 4px 15px rgba(74, 137, 200, 0.25);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .header h1 {
       font-size: 42px; 
       font-weight: 700; 
-      color: #0172b4;
+      color: #ffffff;
       margin-bottom: 15px;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
 
     .header .subtitle {
       font-size: 18px; 
-      color: #2E3A59;
+      color: rgba(255, 255, 255, 0.95);
+      max-width: 650px; 
+      margin: 0 auto; 
+      line-height: 1.7;
     }
 
-    /* Cards */
+    /* Menu Cards */
     .menu-cards {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -101,53 +108,72 @@
       border-radius: 16px;
       padding: 28px 20px;
       text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      border: 2px solid transparent;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(46,58,89,0.08);
       transition: all 0.3s ease;
+      border: 2px solid transparent;
     }
 
     .card:hover {
       transform: translateY(-5px);
-      border-color: #fdac53;
+      box-shadow: 0 8px 25px rgba(74,137,200,0.18);
+      border-color: #4A89C8;
     }
 
     .card-icon {
       width: 60px; height: 60px;
       margin: 0 auto 15px;
-      background-color: #f5df4e;
+      background: linear-gradient(135deg, #E6F0FA 0%, #DCEAF8 100%);
       border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
       font-size: 26px; 
-      color: #0172b4;
+      color: #4A89C8;
     }
 
     .card-title { 
       font-size: 18px; 
       font-weight: 600; 
-      color: #0172b4; 
+      color: #2E3A59; 
       margin-bottom: 8px; 
     }
 
     .card-desc { 
       font-size: 14px; 
-      color: #6B7A90;
+      color: #6B7A90; 
+      line-height: 1.5; 
     }
 
+    /* ✅ New Employee (เอาเขียวออก -> ฟ้าเดียวกับธีม) */
     .new-employee {
       background: #ffffff;
       border-radius: 16px;
       padding: 22px 28px;
       margin: 0 40px 20px 40px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      border-left: 6px solid #fdac53;
+      box-shadow: 0 4px 15px rgba(46,58,89,0.08);
+      border-left: 6px solid #4A89C8; /* ✅ จากเขียว -> ฟ้า */
+    }
+
+    .new-employee h3 { 
+      font-size: 18px; 
+      font-weight: 600; 
+      color: #2E3A59; 
+      margin-bottom: 12px; 
     }
 
     .new-employee h3 i { 
-      color: #0172b4;
+      color: #4A89C8;  /* ✅ จากเขียว -> ฟ้า */
+      margin-right: 10px; 
+    }
+
+    .new-employee ol { 
+      margin-left: 22px; 
+      color: #2E3A59; 
+      line-height: 1.9; 
+      font-size: 14px; 
     }
 
     .new-employee strong { 
-      color: #f5df4e; 
+      color: #4A89C8; 
     }
 
     .footer { 
@@ -164,9 +190,17 @@
         height: 60px;
         flex-direction: row;
         justify-content: center;
+        padding: 10px;
+        position: sticky;
+        top: 0;
       }
       .main-content { margin-left: 0; }
       .menu-cards { grid-template-columns: 1fr; padding: 20px; }
+      .new-employee { margin: 0 20px 20px 20px; }
+
+      .header { padding: 40px 20px; min-height: 170px; }
+      .header h1 { font-size: 28px; }
+      .header .subtitle { font-size: 15px; }
     }
   </style>
 </head>
@@ -229,5 +263,7 @@
       </footer>
     </main>
   </div>
+
+  <script src="Js"></script>
 </body>
 </html>
