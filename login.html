@@ -195,7 +195,8 @@
             box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
         }
 
-        .btn-login.loading {
+        .btn-login.loading,
+        .btn-login:disabled {
             opacity: 0.8;
             pointer-events: none;
         }
@@ -349,6 +350,21 @@
             successDiv.classList.add('show');
         }
 
+        function forceUnlockLogin() {
+            const btnLogin = document.getElementById('btnLogin');
+            const employeeId = document.getElementById('employeeId');
+            const password = document.getElementById('password');
+
+            if (btnLogin) {
+                btnLogin.classList.remove('loading');
+                btnLogin.disabled = false;
+                btnLogin.innerHTML = '<i class="fas fa-sign-in-alt"></i><span>เข้าสู่ระบบ</span>';
+            }
+
+            if (employeeId) employeeId.disabled = false;
+            if (password) password.disabled = false;
+        }
+
         function saveUserSession(userData, rememberMe, employeeId) {
             if (rememberMe) {
                 localStorage.setItem('currentUser', JSON.stringify(userData));
@@ -381,6 +397,7 @@
             }
 
             btnLogin.classList.add('loading');
+            btnLogin.disabled = true;
             btnLogin.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>กำลังเข้าสู่ระบบ...</span>';
 
             try {
@@ -402,8 +419,8 @@
                     showSuccess();
 
                     setTimeout(function() {
-                        window.location.href = 'index.html';
-                    }, 1000);
+                        window.location.replace('index.html');
+                    }, 700);
 
                 } else {
                     showError(result.message || 'รหัสพนักงานหรือรหัสผ่านไม่ถูกต้อง');
@@ -419,13 +436,25 @@
 
         function resetButton() {
             const btnLogin = document.getElementById('btnLogin');
+
             btnLogin.classList.remove('loading');
+            btnLogin.disabled = false;
             btnLogin.innerHTML = '<i class="fas fa-sign-in-alt"></i><span>เข้าสู่ระบบ</span>';
+
+            document.getElementById('employeeId').disabled = false;
+            document.getElementById('password').disabled = false;
+
             document.getElementById('password').value = '';
             document.getElementById('password').focus();
         }
 
-        window.onload = function() {
+        window.addEventListener('pageshow', function () {
+            forceUnlockLogin();
+        });
+
+        window.addEventListener('load', function () {
+            forceUnlockLogin();
+
             const user =
                 localStorage.getItem('kmsUser') ||
                 sessionStorage.getItem('kmsUser') ||
@@ -433,7 +462,7 @@
                 sessionStorage.getItem('currentUser');
 
             if (user) {
-                window.location.href = 'index.html';
+                window.location.replace('index.html');
                 return;
             }
 
@@ -445,7 +474,7 @@
             } else {
                 document.getElementById('employeeId').focus();
             }
-        };
+        });
 
         document.getElementById('employeeId').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
