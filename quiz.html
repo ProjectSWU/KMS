@@ -194,7 +194,10 @@
       <a class="sidebar-icon" data-page="lp" href="learning-path.html"><i class="fas fa-graduation-cap"></i></a>
       <a class="sidebar-icon active" data-page="quiz" href="quiz.html"><i class="fas fa-clipboard-check"></i></a>
       <a class="sidebar-icon" data-page="share" href="share-experience.html"><i class="fas fa-comments"></i></a>
-      <a class="sidebar-icon logout" href="#"><i class="fas fa-sign-out-alt"></i></a>
+
+      <a class="sidebar-icon" href="login.html" id="logoutBtn">
+        <i class="fas fa-sign-out-alt"></i>
+      </a>
     </nav>
 
     <main class="main-content">
@@ -224,7 +227,8 @@
             <li>เข้า <b>Learning Path</b> และเลือกกระบวนการที่รับผิดชอบ</li>
             <li>อ่าน Critical Point + ดูเอกสารประกอบ (OPL / WI / Video)</li>
             <li>กลับมาที่หน้า Quiz แล้วเริ่มทำจาก <b>Quiz 1</b> ตามลำดับ</li>
-            
+            <li>ระบบจะใช้ข้อมูลผู้ใช้ที่ล็อกอินเพื่อบันทึกผลการทำแบบทดสอบ</li>
+            <li>ทำแบบทดสอบให้ครบตามที่หัวหน้างานกำหนด</li>
           </ol>
         </div>
 
@@ -247,43 +251,43 @@
         no: 1,
         quizId: "Quiz1",
         title: "กระบวนการผสมเปียก",
-        desc: ""
+        desc: "ทดสอบ Wet Mass / ความชื้น / ความสม่ำเสมอ"
       },
       {
         no: 2,
         quizId: "Quiz2",
         title: "กระบวนการแร่งเปียก",
-        desc: ""
+        desc: "ทดสอบการแร่ง/ขึ้นรูปเม็ดเปียกและผลกระทบต่อขั้นตอนถัดไป"
       },
       {
         no: 3,
         quizId: "Quiz3",
         title: "กระบวนการอบลมร้อน",
-        desc: ""
+        desc: "ทดสอบการควบคุมความชื้นตกค้างและผลเสียเมื่ออบไม่เหมาะสม"
       },
       {
         no: 4,
         quizId: "Quiz4",
         title: "กระบวนการแร่งแห้ง",
-        desc: ""
+        desc: "ทดสอบการคัดขนาดหลังอบ และผลต่อการไหล/น้ำหนักเม็ด"
       },
       {
         no: 5,
         quizId: "Quiz5",
         title: "กระบวนการผสมแห้ง",
-        desc: ""
+        desc: "ทดสอบความสม่ำเสมอของสูตร และความเสี่ยงจากการผสมไม่ทั่ว"
       },
       {
         no: 6,
         quizId: "Quiz6",
         title: "กระบวนการตอกเม็ดยา",
-        desc: ""
+        desc: "ทดสอบ defect จาก Compression เช่น แตก บิ่น ติดพั้นช์"
       },
       {
         no: 7,
         quizId: "Quiz7",
         title: "กระบวนการบรรจุซอง",
-        desc: ""
+        desc: "ทดสอบการตรวจขั้นสุดท้ายและการตัดสินใจเมื่อพบ NG ระหว่างบรรจุ"
       }
     ];
 
@@ -370,16 +374,23 @@
       });
     }
 
-    document.querySelector('.logout')?.addEventListener('click', function (e) {
-      e.preventDefault();
-      localStorage.removeItem('kmsUser');
-      sessionStorage.removeItem('kmsUser');
-      localStorage.removeItem('currentUser');
-      sessionStorage.removeItem('currentUser');
-      window.location.href = 'login.html';
-    });
-
     renderQuizCards();
+  </script>
+
+  <script>
+    document.getElementById('logoutBtn').addEventListener('click', function(event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      localStorage.removeItem('currentUser');
+      localStorage.removeItem('kmsUser');
+      localStorage.removeItem('savedEmployeeId');
+
+      sessionStorage.removeItem('currentUser');
+      sessionStorage.removeItem('kmsUser');
+
+      window.location.replace('login.html');
+    }, true);
   </script>
 
   <script src="Js"></script>
