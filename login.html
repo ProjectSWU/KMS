@@ -1,398 +1,487 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <script>
-    (function () {
-      const user =
-        localStorage.getItem('kmsUser') ||
-        sessionStorage.getItem('kmsUser') ||
-        localStorage.getItem('currentUser') ||
-        sessionStorage.getItem('currentUser');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เข้าสู่ระบบ - KMS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      if (!user) {
-        window.location.replace('login.html');
-      }
-    })();
-  </script>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a5276 0%, #3498db 50%, #85c1e9 100%);
+            padding: 20px;
+        }
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KMS - Quiz / Check Point</title>
+        .login-container {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 420px;
+            overflow: hidden;
+        }
 
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        .login-header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
 
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Sarabun',sans-serif;background:#F4F7FB;min-height:100vh;color:#2E3A59}
-    .container{display:flex;min-height:100vh}
+        .login-header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: white;
+            border-radius: 50% 50% 0 0;
+        }
 
-    .sidebar{
-      width:70px;background:linear-gradient(180deg,#4A89C8 0%,#2E75B6 100%);
-      display:flex;flex-direction:column;align-items:center;
-      padding-top:20px;gap:10px;position:fixed;height:100vh;z-index:10;
-    }
-    .sidebar-icon{
-      width:50px;height:50px;display:flex;align-items:center;justify-content:center;
-      color:rgba(255,255,255,.85);font-size:20px;border-radius:12px;cursor:pointer;
-      transition:all .3s ease;text-decoration:none;user-select:none;-webkit-tap-highlight-color:transparent;
-    }
-    .sidebar-icon:hover,.sidebar-icon.active{background:rgba(255,255,255,.18);color:#fff}
-    .sidebar-icon:active{transform:scale(.96)}
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
 
-    .main-content{flex:1;padding:0;margin-left:70px}
+        .logo-icon i {
+            font-size: 2.5rem;
+            color: #3498db;
+        }
 
-    .header{
-      background:linear-gradient(135deg,#4A89C8 0%,#2E75B6 100%);
-      padding:60px 40px;
-      min-height:240px;
-      text-align:center;
-      box-shadow:0 4px 15px rgba(74,137,200,.25);
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-    }
-    .header h1{
-      font-size:42px;
-      font-weight:700;
-      color:#fff;
-      margin-bottom:15px;
-      letter-spacing:1px;
-      text-shadow:0 2px 4px rgba(0,0,0,.2);
-    }
-    .header .subtitle{
-      font-size:18px;
-      color:rgba(255,255,255,.95);
-      max-width:780px;
-      margin:0 auto;
-      line-height:1.7;
-    }
+        .login-header h1 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
 
-    .content{padding:30px 40px}
-    .box{
-      background:#fff;border-radius:16px;padding:22px 24px;
-      box-shadow:0 4px 15px rgba(46,58,89,.05);margin-bottom:20px;
-    }
-    .box h3{font-size:16px;font-weight:700;color:#1F2D3D;margin-bottom:10px}
-    .box p{font-size:14px;color:#556;line-height:1.8}
-    .box ol{margin-left:20px;color:#555;line-height:1.9;font-size:14px}
-    .box .hint{margin-top:10px;color:#4A89C8;font-weight:600}
+        .login-header p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+        }
 
-    .quiz-grid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:20px;
-      margin-top:12px;
-      max-width:900px;
-      margin-left:auto;
-      margin-right:auto;
-    }
+        .login-form {
+            padding: 30px;
+        }
 
-    .quiz-card{
-      background:#fff;border-radius:16px;padding:18px 18px;
-      box-shadow:0 4px 15px rgba(46,58,89,.05);
-      transition:all .25s ease;border:2px solid transparent;
-      display:flex;flex-direction:column;justify-content:space-between;min-height:170px;
-    }
-    .quiz-card:hover{
-      transform:translateY(-5px);
-      box-shadow:0 8px 25px rgba(74,137,200,.20);
-      border-color:#4A89C8;
-    }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-    .quiz-card-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      margin-bottom:10px;
-      flex-wrap:wrap;
-    }
+        .form-group label {
+            display: block;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
 
-    .quiz-badge{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:6px 10px;border-radius:999px;
-      background:linear-gradient(135deg,#E6F0FA 0%,#D4E9F7 100%);
-      color:#2E75B6;font-weight:700;font-size:12px;width:fit-content;
-    }
+        .form-group label i {
+            margin-right: 8px;
+            color: #3498db;
+        }
 
-    .quiz-status{
-      display:inline-flex;
-      align-items:center;
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:700;
-      white-space:nowrap;
-    }
-    .quiz-status.pass{
-      background:#dcfce7;
-      color:#166534;
-    }
-    .quiz-status.review{
-      background:#fef3c7;
-      color:#92400e;
-    }
-    .quiz-status.none{
-      background:#f1f5f9;
-      color:#475569;
-    }
+        .input-wrapper {
+            position: relative;
+        }
 
-    .quiz-title{font-size:16px;font-weight:700;color:#1F2D3D;margin-bottom:6px}
-    .quiz-desc{font-size:13px;color:#6B7A90;line-height:1.6}
+        .input-wrapper input {
+            width: 100%;
+            padding: 14px 16px 14px 48px;
+            border: 2px solid #e8f4fc;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Sarabun', sans-serif;
+            transition: all 0.3s ease;
+            background: #f8fbfd;
+        }
 
-    .btn-start{
-      margin-top:14px;display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:11px 14px;border-radius:12px;text-decoration:none;font-weight:700;font-size:14px;color:#fff;
-      background:linear-gradient(135deg,#4A89C8 0%,#2E75B6 100%);
-      box-shadow:0 10px 20px rgba(46,58,89,.10);
-      transition:all .2s ease;
-      width:100%;
-      border:none;
-      cursor:pointer;
-    }
-    .btn-start:hover{transform:translateY(-2px);filter:brightness(1.02)}
-    .btn-start:active{transform:translateY(0)}
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: #3498db;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+        }
 
-    .footer{text-align:center;padding:15px 40px;color:#95a5a6;font-size:13px}
+        .input-wrapper .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #95a5a6;
+            font-size: 1.1rem;
+        }
 
-    @media (max-width: 768px){
-      .container{flex-direction:column;}
+        .input-wrapper .toggle-password {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #95a5a6;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
 
-      .sidebar{
-        width:100%;
-        height:60px;
-        flex-direction:row;
-        justify-content:center;
-        padding:10px;
-        position:fixed;
-        top:0; left:0;
-        z-index:1000;
-      }
+        .input-wrapper .toggle-password:hover {
+            color: #3498db;
+        }
 
-      .main-content{
-        margin-left:0;
-        margin-top:60px;
-      }
+        .form-options {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
 
-      .header{padding:40px 20px;min-height:170px}
-      .header h1{font-size:28px}
-      .header .subtitle{font-size:15px}
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
 
-      .content{padding:18px}
-      .quiz-grid{max-width:100%;}
-    }
-  </style>
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #3498db;
+        }
+
+        .remember-me span {
+            color: #5d6d7e;
+            font-size: 0.9rem;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Sarabun', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-login:hover {
+            background: linear-gradient(135deg, #2980b9, #1a5276);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-login.loading,
+        .btn-login:disabled {
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .error-message {
+            background: #fdf2f2;
+            border: 1px solid #f5c6cb;
+            color: #c0392b;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .error-message.show {
+            display: flex;
+        }
+
+        .success-message {
+            background: #e8f8f0;
+            border: 1px solid #a3e4bc;
+            color: #1e8449;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .success-message.show {
+            display: flex;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .login-container { border-radius: 20px; }
+            .login-header { padding: 30px 20px; }
+            .logo-icon { width: 70px; height: 70px; }
+            .logo-icon i { font-size: 2rem; }
+            .login-header h1 { font-size: 1.3rem; }
+            .login-form { padding: 25px 20px; }
+        }
+
+        @media (max-width: 380px) {
+            .login-header { padding: 25px 15px; }
+            .login-form { padding: 20px 15px; }
+            .login-header h1 { font-size: 1.2rem; }
+        }
+    </style>
 </head>
-
 <body>
-  <div class="container">
-    <nav class="sidebar">
-      <a class="sidebar-icon" data-page="index" href="index.html"><i class="fas fa-home"></i></a>
-      <a class="sidebar-icon" data-page="kb" href="knowledge-base.html"><i class="fas fa-book"></i></a>
-      <a class="sidebar-icon" data-page="lp" href="learning-path.html"><i class="fas fa-graduation-cap"></i></a>
-      <a class="sidebar-icon active" data-page="quiz" href="quiz.html"><i class="fas fa-clipboard-check"></i></a>
-      <a class="sidebar-icon" data-page="share" href="share-experience.html"><i class="fas fa-comments"></i></a>
-
-      <a class="sidebar-icon" href="login.html" id="logoutBtn">
-        <i class="fas fa-sign-out-alt"></i>
-      </a>
-    </nav>
-
-    <main class="main-content">
-      <header class="header">
-        <h1>Quiz / Check Point</h1>
-        <p class="subtitle">
-          หน้านี้มีไว้สำหรับทดสอบความเข้าใจหลังเรียนรู้ในแต่ละกระบวนการ<br>
-          กรุณาเริ่มทำจาก Quiz 1 และทำตามลำดับจนถึง Quiz 7<br>
-          * ระบบจะบันทึกผลการตอบรายข้อของผู้ใช้งานที่ล็อกอิน
-        </p>
-      </header>
-
-      <section class="content">
-        <div class="box">
-          <h3><i class="fas fa-info-circle" style="color:#4A89C8;margin-right:8px;"></i> หน้านี้มีไว้ทำอะไร</h3>
-          <p>
-            แบบทดสอบนี้ใช้สำหรับประเมินความเข้าใจในกระบวนการผลิตยาอมมะแว้ง
-            โดยผู้ทำควรเรียนรู้จาก <b>Learning Path</b> ก่อน แล้วจึงทำ Quiz ตามลำดับ
-            เพื่อเช็คความพร้อมก่อนปฏิบัติงานจริง
-          </p>
-          <p class="hint">แนะนำ: ถ้ายังไม่มั่นใจ ให้กลับไปทบทวน Learning Path ก่อนทำแบบทดสอบ</p>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo-icon">
+                <i class="fas fa-industry"></i>
+            </div>
+            <h1>Knowledge Management System</h1>
+            <p>ระบบจัดการความรู้ภายในองค์กร</p>
         </div>
 
-        <div class="box">
-          <h3><i class="fas fa-list-check" style="color:#4A89C8;margin-right:8px;"></i> ขั้นตอนการทำแบบทดสอบ</h3>
-          <ol>
-            <li>เข้า <b>Learning Path</b> และเลือกกระบวนการที่รับผิดชอบ</li>
-            <li>อ่าน Critical Point + ดูเอกสารประกอบ (OPL / WI / Video)</li>
-            <li>กลับมาที่หน้า Quiz แล้วเริ่มทำจาก <b>Quiz 1</b> ตามลำดับ</li>
-            <li>ระบบจะใช้ข้อมูลผู้ใช้ที่ล็อกอินเพื่อบันทึกผลการทำแบบทดสอบ</li>
-            <li>ทำแบบทดสอบให้ครบตามที่หัวหน้างานกำหนด</li>
-          </ol>
-        </div>
-
-        <div class="quiz-grid" id="quizContainer"></div>
-      </section>
-
-      <footer class="footer">
-        <p>Knowledge Management System | ใช้ภายในองค์กรเท่านั้น</p>
-      </footer>
-    </main>
-  </div>
-
-  <script>
-    const CONFIG = {
-      API_URL: 'https://script.google.com/macros/s/AKfycbyM4bvM0Lxii-BLOqgtOVtYMcWm0_eHl905yMp2frMS1hHqHN6f3KKQHCwS8t7ThFvfqA/exec'
-    };
-
-    const quizzes = [
-      {
-        no: 1,
-        quizId: "Quiz1",
-        title: "กระบวนการผสมเปียก",
-        desc: "ทดสอบ Wet Mass / ความชื้น / ความสม่ำเสมอ"
-      },
-      {
-        no: 2,
-        quizId: "Quiz2",
-        title: "กระบวนการแร่งเปียก",
-        desc: "ทดสอบการแร่ง/ขึ้นรูปเม็ดเปียกและผลกระทบต่อขั้นตอนถัดไป"
-      },
-      {
-        no: 3,
-        quizId: "Quiz3",
-        title: "กระบวนการอบลมร้อน",
-        desc: "ทดสอบการควบคุมความชื้นตกค้างและผลเสียเมื่ออบไม่เหมาะสม"
-      },
-      {
-        no: 4,
-        quizId: "Quiz4",
-        title: "กระบวนการแร่งแห้ง",
-        desc: "ทดสอบการคัดขนาดหลังอบ และผลต่อการไหล/น้ำหนักเม็ด"
-      },
-      {
-        no: 5,
-        quizId: "Quiz5",
-        title: "กระบวนการผสมแห้ง",
-        desc: "ทดสอบความสม่ำเสมอของสูตร และความเสี่ยงจากการผสมไม่ทั่ว"
-      },
-      {
-        no: 6,
-        quizId: "Quiz6",
-        title: "กระบวนการตอกเม็ดยา",
-        desc: "ทดสอบ defect จาก Compression เช่น แตก บิ่น ติดพั้นช์"
-      },
-      {
-        no: 7,
-        quizId: "Quiz7",
-        title: "กระบวนการบรรจุซอง",
-        desc: "ทดสอบการตรวจขั้นสุดท้ายและการตัดสินใจเมื่อพบ NG ระหว่างบรรจุ"
-      }
-    ];
-
-    const container = document.getElementById("quizContainer");
-
-    function getLoggedInUser() {
-      const raw =
-        localStorage.getItem('kmsUser') ||
-        sessionStorage.getItem('kmsUser') ||
-        localStorage.getItem('currentUser') ||
-        sessionStorage.getItem('currentUser');
-
-      if (!raw) return null;
-
-      try {
-        const user = JSON.parse(raw);
-        return {
-          employeeId: user.employeeId || user.id || '',
-          name: user.name || ''
-        };
-      } catch (e) {
-        return null;
-      }
-    }
-
-    async function fetchQuizStatus(employeeId) {
-      if (!employeeId) return {};
-
-      const url = `${CONFIG.API_URL}?view=quizstatus&employeeId=${encodeURIComponent(employeeId)}`;
-      const response = await fetch(url);
-      const result = await response.json();
-
-      if (!result.success) {
-        return {};
-      }
-
-      return result.data || {};
-    }
-
-    function renderStatusBadge(status) {
-      if (!status || !status.done) {
-        return `<div class="quiz-status none">ยังไม่เคยทำ</div>`;
-      }
-
-      const passed = status.total > 0 && (status.score / status.total) >= 0.8;
-
-      return `
-        <div class="quiz-status ${passed ? 'pass' : 'review'}">
-          ทำแล้ว • ${status.score} / ${status.total}
-        </div>
-      `;
-    }
-
-    async function renderQuizCards() {
-      const user = getLoggedInUser();
-      const statusMap = user?.employeeId
-        ? await fetchQuizStatus(user.employeeId)
-        : {};
-
-      container.innerHTML = '';
-
-      quizzes.forEach(q => {
-        const card = document.createElement("div");
-        card.className = "quiz-card";
-
-        card.innerHTML = `
-          <div>
-            <div class="quiz-card-top">
-              <div class="quiz-badge"><i class="fas fa-clipboard-check"></i> Quiz ${q.no}</div>
-              ${renderStatusBadge(statusMap[q.quizId])}
+        <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText">รหัสพนักงานหรือรหัสผ่านไม่ถูกต้อง</span>
             </div>
 
-            <div class="quiz-title">${q.title}</div>
-            <div class="quiz-desc">${q.desc}</div>
-          </div>
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <span>เข้าสู่ระบบสำเร็จ กำลังนำท่านไปยังหน้าหลัก...</span>
+            </div>
 
-          <a class="btn-start"
-             href="quiz play.html?quiz=${encodeURIComponent(q.quizId)}">
-            <i class="fas fa-play"></i> เริ่มทำแบบทดสอบ
-          </a>
-        `;
+            <div class="form-group">
+                <label for="employeeId">
+                    <i class="fas fa-id-card"></i>รหัสพนักงาน
+                </label>
+                <div class="input-wrapper">
+                    <input type="text" id="employeeId" name="employeeId" placeholder="กรอกรหัสพนักงาน" required>
+                    <i class="fas fa-user input-icon"></i>
+                </div>
+            </div>
 
-        container.appendChild(card);
-      });
-    }
+            <div class="form-group">
+                <label for="password">
+                    <i class="fas fa-lock"></i>รหัสผ่าน
+                </label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" name="password" placeholder="กรอกรหัสผ่าน" required>
+                    <i class="fas fa-key input-icon"></i>
+                    <button type="button" class="toggle-password" onclick="togglePassword()">
+                        <i class="fas fa-eye" id="toggleIcon"></i>
+                    </button>
+                </div>
+            </div>
 
-    renderQuizCards();
-  </script>
+            <div class="form-options">
+                <label class="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    <span>จดจำการเข้าสู่ระบบ</span>
+                </label>
+            </div>
 
-  <script>
-    document.getElementById('logoutBtn').addEventListener('click', function(event) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
+            <button type="submit" class="btn-login" id="btnLogin">
+                <i class="fas fa-sign-in-alt"></i>
+                <span>เข้าสู่ระบบ</span>
+            </button>
+        </form>
+    </div>
 
-      localStorage.removeItem('currentUser');
-      localStorage.removeItem('kmsUser');
-      localStorage.removeItem('savedEmployeeId');
+    <script>
+        const API_URL = 'https://script.google.com/macros/s/AKfycbz1SmAmMToaNZH4KAvNiIvCBf4WoU80G8fMcZzS_zhOiuWjjJHb41TZpdQSmiITiKZuSg/exec';
 
-      sessionStorage.removeItem('currentUser');
-      sessionStorage.removeItem('kmsUser');
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
 
-      window.location.replace('login.html');
-    }, true);
-  </script>
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
 
-  <script src="Js"></script>
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            const successDiv = document.getElementById('successMessage');
+
+            successDiv.classList.remove('show');
+            errorText.textContent = message;
+            errorDiv.classList.add('show');
+
+            setTimeout(function() {
+                errorDiv.classList.remove('show');
+            }, 5000);
+        }
+
+        function showSuccess() {
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+
+            errorDiv.classList.remove('show');
+            successDiv.classList.add('show');
+        }
+
+        function forceUnlockLogin() {
+            const btnLogin = document.getElementById('btnLogin');
+            const employeeId = document.getElementById('employeeId');
+            const password = document.getElementById('password');
+
+            if (btnLogin) {
+                btnLogin.classList.remove('loading');
+                btnLogin.disabled = false;
+                btnLogin.innerHTML = '<i class="fas fa-sign-in-alt"></i><span>เข้าสู่ระบบ</span>';
+            }
+
+            if (employeeId) employeeId.disabled = false;
+            if (password) password.disabled = false;
+        }
+
+        function saveUserSession(userData, rememberMe, employeeId) {
+            if (rememberMe) {
+                localStorage.setItem('currentUser', JSON.stringify(userData));
+                localStorage.setItem('kmsUser', JSON.stringify(userData));
+                localStorage.setItem('savedEmployeeId', employeeId);
+
+                sessionStorage.removeItem('currentUser');
+                sessionStorage.removeItem('kmsUser');
+            } else {
+                sessionStorage.setItem('currentUser', JSON.stringify(userData));
+                sessionStorage.setItem('kmsUser', JSON.stringify(userData));
+
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('kmsUser');
+                localStorage.removeItem('savedEmployeeId');
+            }
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+
+            const employeeId = document.getElementById('employeeId').value.trim();
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            const btnLogin = document.getElementById('btnLogin');
+
+            if (!employeeId || !password) {
+                showError('กรุณากรอกรหัสพนักงานและรหัสผ่าน');
+                return;
+            }
+
+            btnLogin.classList.add('loading');
+            btnLogin.disabled = true;
+            btnLogin.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>กำลังเข้าสู่ระบบ...</span>';
+
+            try {
+                const url = API_URL + '?action=login&employeeId=' + encodeURIComponent(employeeId) + '&password=' + encodeURIComponent(password);
+                const response = await fetch(url);
+                const result = await response.json();
+
+                if (result.success) {
+                    const userData = {
+                        employeeId: result.user.employeeId,
+                        name: result.user.name,
+                        role: result.user.role,
+                        department: result.user.department,
+                        status: result.user.status || '',
+                        loginTime: new Date().toISOString()
+                    };
+
+                    saveUserSession(userData, rememberMe, employeeId);
+                    showSuccess();
+
+                    setTimeout(function() {
+                        window.location.replace('index.html');
+                    }, 700);
+
+                } else {
+                    showError(result.message || 'รหัสพนักงานหรือรหัสผ่านไม่ถูกต้อง');
+                    resetButton();
+                }
+
+            } catch (error) {
+                console.error('Login error:', error);
+                showError('ไม่สามารถเชื่อมต่อระบบได้ กรุณาลองใหม่');
+                resetButton();
+            }
+        }
+
+        function resetButton() {
+            const btnLogin = document.getElementById('btnLogin');
+
+            btnLogin.classList.remove('loading');
+            btnLogin.disabled = false;
+            btnLogin.innerHTML = '<i class="fas fa-sign-in-alt"></i><span>เข้าสู่ระบบ</span>';
+
+            document.getElementById('employeeId').disabled = false;
+            document.getElementById('password').disabled = false;
+
+            document.getElementById('password').value = '';
+            document.getElementById('password').focus();
+        }
+
+        window.addEventListener('pageshow', function () {
+            forceUnlockLogin();
+        });
+
+        window.addEventListener('load', function () {
+            forceUnlockLogin();
+
+            const user =
+                localStorage.getItem('kmsUser') ||
+                sessionStorage.getItem('kmsUser') ||
+                localStorage.getItem('currentUser') ||
+                sessionStorage.getItem('currentUser');
+
+            if (user) {
+                window.location.replace('index.html');
+                return;
+            }
+
+            const savedId = localStorage.getItem('savedEmployeeId');
+            if (savedId) {
+                document.getElementById('employeeId').value = savedId;
+                document.getElementById('rememberMe').checked = true;
+                document.getElementById('password').focus();
+            } else {
+                document.getElementById('employeeId').focus();
+            }
+        });
+
+        document.getElementById('employeeId').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('password').focus();
+            }
+        });
+    </script>
 </body>
 </html>
