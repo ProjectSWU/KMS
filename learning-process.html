@@ -2,11 +2,11 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Learning Process - KMS</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
@@ -14,309 +14,650 @@
     body{
       font-family:'Sarabun',sans-serif;
       background:#F4F7FB;
+      color:#2E3A59;
       min-height:100vh;
       overflow-x:hidden;
-      color:#2E3A59;
-      font-size:14px;
-      line-height:1.7;
     }
+
     .container{display:flex;min-height:100vh}
 
     .sidebar{
       width:70px;
       background:linear-gradient(180deg,#4A89C8 0%,#2E75B6 100%);
-      display:flex;flex-direction:column;align-items:center;
-      padding-top:20px;gap:10px;
-      position:fixed;height:100vh;left:0;top:0;z-index:100;
+      position:fixed;
+      left:0;
+      top:0;
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding-top:20px;
+      gap:10px;
+      z-index:100;
     }
-    .sidebar-icon{
-      width:50px;height:50px;display:flex;align-items:center;justify-content:center;
-      color:rgba(255,255,255,.85);
-      font-size:20px;border-radius:12px;
-      cursor:pointer;transition:.2s;text-decoration:none;
-      user-select:none;-webkit-tap-highlight-color:transparent;
-    }
-    .sidebar-icon:hover,.sidebar-icon.active{background:rgba(255,255,255,.18);color:#fff}
 
-    .main-content{flex:1;margin-left:70px;width:calc(100% - 70px);padding:0}
+    .sidebar-icon{
+      width:50px;
+      height:50px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:rgba(255,255,255,.9);
+      text-decoration:none;
+      font-size:20px;
+      transition:.2s;
+    }
+
+    .sidebar-icon:hover,
+    .sidebar-icon.active{
+      background:rgba(255,255,255,.16);
+      color:#fff;
+    }
+
+    .main-content{
+      flex:1;
+      margin-left:70px;
+      width:calc(100% - 70px);
+    }
 
     .header{
       background:linear-gradient(135deg,#4A89C8 0%,#2E75B6 100%);
       padding:60px 40px;
-      min-height:240px;
+      min-height:220px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
       text-align:center;
-      box-shadow:0 4px 15px rgba(74,137,200,.25);
-      display:flex;flex-direction:column;justify-content:center;align-items:center;
-    }
-    .header h1{
-      color:#fff;font-size:42px;font-weight:700;margin-bottom:15px;letter-spacing:1px;
-      text-shadow:0 2px 4px rgba(0,0,0,.2);
-    }
-    .header p{
-      color:rgba(255,255,255,.95);
-      font-size:18px;max-width:650px;margin:0 auto;line-height:1.7;
     }
 
-    .wrap{padding:16px 18px 24px}
+    .header h1{
+      color:#fff;
+      font-size:42px;
+      font-weight:900;
+      margin-bottom:14px;
+    }
+
+    .header p{
+      color:rgba(255,255,255,.92);
+      font-size:18px;
+      line-height:1.7;
+    }
+
+    .wrap{padding:16px}
 
     .topbar{
-      background:#fff;border-radius:16px;padding:14px 16px;
-      box-shadow:0 2px 10px rgba(46,58,89,.08);
-      display:flex;align-items:center;justify-content:space-between;
-      gap:12px;flex-wrap:wrap;margin-bottom:14px;
+      background:#fff;
+      border-radius:20px;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:12px;
+      box-shadow:0 4px 16px rgba(46,58,89,.06);
+      margin-bottom:14px;
     }
+
+    .topbar-left{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
     .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 12px;border-radius:999px;
-      background:#E6F0FA;color:#2E75B6;
-      font-weight:800;font-size:13px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      background:#EAF3FF;
+      color:#2F80ED;
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:800;
     }
-    .meta{color:#6B7A90;font-size:13px}
+
+    .meta{
+      font-size:13px;
+      color:#6B7A90;
+      font-weight:700;
+    }
+
     .btn-back{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:10px 12px;border-radius:10px;
-      background:#4A89C8;color:#fff;text-decoration:none;font-weight:800;
+      background:#2F80ED;
+      color:#fff;
+      text-decoration:none;
+      padding:12px 18px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
     }
-    .btn-back:hover{background:#2E75B6}
 
     .stage{
       display:grid;
-      grid-template-columns: 1fr 340px;
-      gap:14px;
-      align-items:stretch;
+      grid-template-columns:1fr 420px;
+      gap:16px;
+      align-items:start;
     }
-    @media (max-width: 980px){ .stage{grid-template-columns:1fr} }
+
+    @media(max-width:1200px){
+      .stage{grid-template-columns:1fr}
+    }
 
     .slide{
-      background:#fff;border-radius:18px;
-      box-shadow:0 6px 18px rgba(46,58,89,.10);
+      background:#fff;
+      border-radius:24px;
       overflow:hidden;
-      display:flex;flex-direction:column;min-height:520px;
+      box-shadow:0 8px 24px rgba(46,58,89,.08);
     }
 
     .slide-head{
-      padding:16px 16px 12px;border-bottom:1px solid #eef3f8;
-      display:flex;gap:12px;align-items:flex-start;
+      padding:22px;
+      border-bottom:1px solid #EEF3F8;
+      display:flex;
+      gap:16px;
+      align-items:flex-start;
     }
+
     .badge{
-      width:44px;height:44px;border-radius:16px;
-      background:#4A89C8;color:#fff;
-      display:flex;align-items:center;justify-content:center;
-      font-weight:900;font-size:16px;flex:0 0 auto;
+      width:58px;
+      height:58px;
+      border-radius:18px;
+      background:#2F80ED;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:26px;
+      font-weight:900;
+      flex:0 0 auto;
     }
+
     .head-text{flex:1}
-    .title{font-weight:900;color:#1f2d3d;font-size:20px;line-height:1.15;margin-top:2px}
-    .short{margin-top:8px;color:#6B7A90;font-size:14px;line-height:1.45}
+
+    .title{
+      font-size:34px;
+      line-height:1.15;
+      font-weight:900;
+      color:#1F2D3D;
+    }
+
+    .short{
+      margin-top:8px;
+      font-size:18px;
+      color:#6B7A90;
+      font-weight:600;
+    }
 
     .slide-body{
-      padding:14px 16px 16px;
-      display:flex;flex-direction:column;gap:12px;flex:1;
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .process-flow-section{
+      background:#F8FBFF;
+      border:1px solid #E5EDF5;
+      border-radius:22px;
+      padding:20px;
+    }
+
+    .side-section-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#234A74;
+      font-weight:900;
+      font-size:18px;
+    }
+
+    .flow-top-wrap{
+      margin-top:18px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      overflow-x:auto;
+      padding-bottom:10px;
+      scroll-behavior:smooth;
+    }
+
+    .flow-top-wrap::-webkit-scrollbar{height:8px}
+    .flow-top-wrap::-webkit-scrollbar-thumb{
+      background:#C8D8EB;
+      border-radius:999px;
+    }
+
+    .flow-start,
+    .flow-end{
+      min-width:110px;
+      height:62px;
+      border-radius:18px;
+      border:2px solid #2F80ED;
+      background:#fff;
+      color:#2F80ED;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:14px;
+      font-weight:900;
+      flex:0 0 auto;
+    }
+
+    .flow-arrow-inline{
+      color:#7B8BA1;
+      font-size:18px;
+      flex:0 0 auto;
+    }
+
+    .flow-step{
+      min-width:280px;
+      min-height:120px;
+      background:#fff;
+      border:2px solid #E5EDF5;
+      border-radius:22px;
+      padding:18px 16px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      transition:.2s;
+      cursor:pointer;
+      flex:0 0 auto;
+    }
+
+    .flow-step:hover{transform:translateY(-2px)}
+
+    .flow-step-no{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#EAF3FF;
+      color:#2F80ED;
+      font-weight:900;
+      font-size:16px;
+      margin-bottom:14px;
+    }
+
+    .flow-step-short{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.55;
+      color:#1F2D3D;
+      text-align:center;
+    }
+
+    .flow-step.completed{
+      background:#F0FDF4;
+      border-color:#22C55E;
+    }
+
+    .flow-step.completed .flow-step-no{
+      background:#22C55E;
+      color:#fff;
+    }
+
+    .flow-step.active{
+      background:#EFF6FF;
+      border-color:#2F80ED;
+      box-shadow:0 0 0 5px rgba(47,128,237,.15);
+    }
+
+    .flow-step.active .flow-step-no{
+      background:#2F80ED;
+      color:#fff;
     }
 
     .detail{
-      color:#2E3A59;
-      font-size:14px;
-      line-height:1.55;
       background:#fff;
-      border:none;
-      padding:12px 12px;
-      border-radius:14px;
-      white-space: pre-line;
+      border-radius:18px;
+      padding:18px;
+      font-size:17px;
+      line-height:1.9;
+      white-space:pre-line;
     }
 
-    .wi-actions{ margin-top: 10px; }
+    .wi-actions{margin-top:4px}
+
     .btn-wi{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:12px 14px;border-radius:12px;
-      background:#2F80ED;color:#fff;text-decoration:none;font-weight:900;
-      transition:.2s;
-      box-shadow:0 6px 16px rgba(47,128,237,0.22);
-      width: fit-content;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:#2F80ED;
+      color:#fff;
+      text-decoration:none;
+      padding:14px 18px;
+      border-radius:16px;
+      width:fit-content;
+      font-weight:900;
     }
-    .btn-wi:hover{ transform: translateY(-1px); filter:brightness(.98); }
+
     .btn-wi.disabled{
-      background:#c9d6e3;color:#5b6b7a;box-shadow:none;pointer-events:none;
+      background:#c9d6e3;
+      color:#5b6b7a;
+      pointer-events:none;
     }
 
     .hazard-frame{
       --b:8px;
       --r:22px;
-      --pad:0px;
       position:relative;
       border-radius:var(--r);
-      padding:calc(var(--b) + var(--pad));
-      box-shadow:0 6px 18px rgba(46,58,89,.12);
+      padding:var(--b);
       overflow:hidden;
-      background:transparent;
     }
+
     .hazard-frame::before{
       content:"";
-      position:absolute;inset:0;
+      position:absolute;
+      inset:0;
       border-radius:var(--r);
       background:repeating-linear-gradient(
         45deg,
         var(--c1) 0 14px,
         var(--c2) 14px 28px
       );
-      z-index:0;
     }
+
     .hazard-frame::after{
       content:"";
       position:absolute;
       inset:var(--b);
       border-radius:calc(var(--r) - var(--b));
       background:var(--inner);
-      z-index:1;
     }
 
     .hazard-red{
       --c1:#111;
-      --c2:#D32F2F;
-      --inner:#FDECEA;
+      --c2:#E53935;
+      --inner:#FFF1F1;
     }
+
     .hazard-yellow{
       --c1:#111;
-      --c2:#F7D400;
-      --inner:#FFF8E1;
+      --c2:#FFD600;
+      --inner:#FFFBEA;
     }
 
-    .critical, .impact{
+    .critical,
+    .impact{
       position:relative;
       z-index:2;
-      border:none !important;
-      outline:none;
-      box-shadow:none;
-      border-radius:0;
       padding:18px;
-      display:flex;gap:10px;align-items:flex-start;
-      font-size:14px;font-weight:800;
-      background:transparent;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      font-size:14px;
+      font-weight:800;
+      line-height:1.6;
     }
-    .critical{
-      color:#B71C1C;
-      white-space: pre-line;
-    }
-    .impact{ color:#7A4F00; }
 
-    .critical i,.impact i{margin-top:3px}
+    .critical{
+      color:#C62828;
+      white-space:pre-line;
+    }
+
+    .impact{color:#8A5A00}
+
+    .critical i,
+    .impact i{
+      margin-top:3px;
+      flex:0 0 auto;
+    }
 
     .impact-text{flex:1}
-    .impact-title{font-weight:900;margin-bottom:6px}
-    .impact-line{white-space:pre-line;font-weight:900}
-    .impact-subtitle{font-weight:900;margin-top:12px;margin-bottom:6px}
-    .impact-list{white-space:pre-line;font-weight:800}
+
+    .impact-content{
+      color:#7A5200;
+      font-size:15px;
+      font-weight:800;
+      line-height:1.45;
+    }
+
+    .impact-heading{
+      font-weight:900;
+      margin-bottom:4px;
+    }
+
+    .impact-subheading{
+      font-weight:900;
+      margin-top:10px;
+      margin-bottom:4px;
+    }
+
+    .impact-value{
+      white-space:pre-line;
+    }
 
     .panel{
-      background:#fff;border-radius:18px;
-      box-shadow:0 2px 10px rgba(46,58,89,.08);
-      padding:14px;
-      display:flex;flex-direction:column;gap:12px;
-    }
-    .progress{
-      background:#f2f7fd;border:1px solid #e3edf8;border-radius:16px;padding:12px;
-    }
-    .progress-top{
-      display:flex;justify-content:space-between;align-items:center;gap:10px;
-      color:#294b6a;font-weight:800;
-    }
-    .bar{
-      height:10px;border-radius:999px;background:#dbe7f6;margin-top:10px;overflow:hidden;
-    }
-    .bar > div{
-      height:100%;width:0%;
-      background:#4A89C8;border-radius:999px;transition:width .25s ease;
+      background:#fff;
+      border-radius:24px;
+      padding:20px;
+      box-shadow:0 8px 24px rgba(46,58,89,.08);
+      display:flex;
+      flex-direction:column;
+      gap:18px;
     }
 
-    .nav-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .btn{
-      border:none;border-radius:14px;padding:12px 12px;
-      font-family:'Sarabun',sans-serif;font-weight:900;
-      cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;
-      transition:.2s;
+    .progress{
+      background:#F5F9FF;
+      border:1px solid #E2ECF8;
+      border-radius:18px;
+      padding:16px;
     }
-    .btn:disabled{opacity:.45;cursor:not-allowed}
-    .btn-prev{background:#eef3f8;color:#2c3e50}
-    .btn-prev:hover{background:#e4ecf5}
-    .btn-next{background:#4A89C8;color:#fff}
-    .btn-next:hover{background:#2E75B6}
+
+    .progress-top{
+      display:flex;
+      justify-content:space-between;
+      font-weight:900;
+      color:#234A74;
+    }
+
+    .bar{
+      margin-top:12px;
+      height:12px;
+      border-radius:999px;
+      background:#DCE8F6;
+      overflow:hidden;
+    }
+
+    .bar > div{
+      height:100%;
+      background:#2F80ED;
+      border-radius:999px;
+    }
+
+    .nav-btns{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .btn{
+      border:none;
+      padding:14px;
+      border-radius:16px;
+      font-family:'Sarabun',sans-serif;
+      font-weight:900;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    .btn-prev{
+      background:#EEF3F8;
+      color:#2E3A59;
+    }
+
+    .btn-next{
+      background:#2F80ED;
+      color:#fff;
+    }
+
+    .btn:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
 
     .btn-defect{
-      margin-top:10px;display:flex;align-items:center;justify-content:center;gap:8px;
-      padding:14px;border-radius:14px;
+      margin-top:4px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:14px;
+      border-radius:14px;
       background:#4A89C8;
       color:#fff;
-      font-weight:900;text-decoration:none;transition:.2s;
+      font-weight:900;
+      text-decoration:none;
     }
 
-    .btn-defect:hover{
-      background:#2E75B6;
-      filter:brightness(.95)
+    .mini-list{
+      border:1px solid #E9F0F8;
+      border-radius:18px;
+      overflow:hidden;
     }
 
-    .mini-list{border:1px solid #eef3f8;border-radius:16px;overflow:hidden}
     .mini-item{
-      padding:10px 12px;display:flex;gap:10px;align-items:flex-start;
-      border-bottom:1px solid #eef3f8;cursor:pointer;background:#fff;
+      padding:14px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      border-bottom:1px solid #EEF3F8;
+      cursor:pointer;
     }
+
     .mini-item:last-child{border-bottom:none}
+
     .mini-no{
-      width:26px;height:26px;border-radius:10px;background:#E6F0FA;color:#2E75B6;
-      display:flex;align-items:center;justify-content:center;
-      font-weight:900;font-size:12px;flex:0 0 auto;margin-top:1px;
+      width:34px;
+      height:34px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#EAF3FF;
+      color:#2F80ED;
+      font-size:13px;
+      font-weight:900;
+      flex:0 0 auto;
     }
-    .mini-t{font-size:13px;font-weight:900;color:#1f2d3d;line-height:1.25}
-    .mini-s{font-size:12px;color:#6B7A90;margin-top:4px;line-height:1.3}
-    .mini-item.active{background:#f3f9ff;outline:2px solid #cfe4ff;outline-offset:-2px}
+
+    .mini-t{
+      font-size:15px;
+      font-weight:900;
+      color:#1F2D3D;
+      line-height:1.4;
+    }
+
+    .mini-s{
+      margin-top:4px;
+      font-size:13px;
+      line-height:1.45;
+      color:#6B7A90;
+    }
+
+    .mini-item.completed{
+      background:#F0FDF4;
+      border-left:6px solid #22C55E;
+    }
+
+    .mini-item.completed .mini-no{
+      background:#22C55E;
+      color:#fff;
+    }
+
+    .mini-item.active{
+      background:#EFF6FF;
+      border-left:6px solid #2F80ED;
+    }
+
+    .mini-item.active .mini-no{
+      background:#2F80ED;
+      color:#fff;
+    }
 
     .loading,.error{
-      background:#fff;border-radius:16px;padding:30px;
-      box-shadow:0 2px 10px rgba(46,58,89,.08);
-      text-align:center;color:#6B7A90;
+      background:#fff;
+      border-radius:18px;
+      padding:30px;
+      text-align:center;
+      color:#6B7A90;
+      box-shadow:0 4px 16px rgba(46,58,89,.06);
     }
-    .loading i{font-size:46px;margin-bottom:10px;color:#90a4ae}
-    .error i{font-size:46px;margin-bottom:10px;color:#e57373}
 
-    @media (max-width: 768px){
+    @media(max-width:768px){
       .container{flex-direction:column}
+
       .sidebar{
-        width:100%;height:60px;flex-direction:row;justify-content:center;
-        position:relative;left:auto;top:auto;padding:10px;gap:12px;
+        width:100%;
+        height:60px;
+        flex-direction:row;
+        justify-content:center;
+        position:relative;
+        padding:10px;
       }
-      .main-content{margin-left:0;width:100%}
-      .header{padding:40px 20px;min-height:170px}
-      .header h1{font-size:28px}
-      .header p{font-size:15px;max-width:650px}
-      .wrap{padding:12px 12px 20px}
-      .slide{min-height:unset}
+
+      .main-content{
+        margin-left:0;
+        width:100%;
+      }
+
+      .header{
+        padding:40px 20px;
+        min-height:170px;
+      }
+
+      .header h1{font-size:30px}
+      .header p{font-size:15px}
+      .wrap{padding:12px}
     }
   </style>
 </head>
 
 <body>
+
 <div class="container">
 
-<nav class="sidebar">
-  <a class="sidebar-icon" data-page="index" href="index.html"><i class="fas fa-home"></i></a>
-  <a class="sidebar-icon" data-page="kb" href="knowledge-base.html"><i class="fas fa-book"></i></a>
-  <a class="sidebar-icon active" data-page="lp" href="learning-path.html"><i class="fas fa-graduation-cap"></i></a>
-  <a class="sidebar-icon" data-page="quiz" href="quiz.html"><i class="fas fa-clipboard-check"></i></a>
-  <a class="sidebar-icon" data-page="share" href="share-experience.html"><i class="fas fa-comments"></i></a>
-  <a class="sidebar-icon" href="login.html" id="logoutBtn"><i class="fas fa-sign-out-alt"></i></a>
-</nav>
+  <nav class="sidebar">
+    <a class="sidebar-icon" href="index.html"><i class="fas fa-home"></i></a>
+    <a class="sidebar-icon" href="knowledge-base.html"><i class="fas fa-book"></i></a>
+    <a class="sidebar-icon active" href="learning-path.html"><i class="fas fa-graduation-cap"></i></a>
+    <a class="sidebar-icon" href="quiz.html"><i class="fas fa-clipboard-check"></i></a>
+    <a class="sidebar-icon" href="share-experience.html"><i class="fas fa-comments"></i></a>
+    <a class="sidebar-icon" href="login.html" id="logoutBtn"><i class="fas fa-sign-out-alt"></i></a>
+  </nav>
 
   <main class="main-content">
+
     <header class="header">
       <h1>Learning Process</h1>
-      <p>เรียนทีละ Step แบบสไลด์ — 1 ขั้นตอนต่อ 1 หน้า กด “ถัดไป” เพื่อไปต่อ</p>
+      <p>เรียนทีละ Step แบบสไลด์ — 1 ขั้นตอนต่อ 1 หน้า</p>
     </header>
 
     <div class="wrap">
+
       <div class="topbar">
-        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-          <span class="pill"><i class="fas fa-gear"></i> <span id="procTitle">Process</span></span>
-          <span class="meta" id="procMeta">-</span>
+        <div class="topbar-left">
+          <div class="pill">
+            <i class="fas fa-gear"></i>
+            <span id="procTitle">Process</span>
+          </div>
+          <div class="meta" id="procMeta">-</div>
         </div>
-        <a class="btn-back" href="learning-path.html"><i class="fas fa-arrow-left"></i> กลับหน้า Learning Path</a>
+
+        <a class="btn-back" href="learning-path.html">
+          <i class="fas fa-arrow-left"></i>
+          กลับหน้า Learning Path
+        </a>
       </div>
 
       <div id="content">
@@ -325,8 +666,10 @@
           <div>กำลังโหลดข้อมูล...</div>
         </div>
       </div>
+
     </div>
   </main>
+
 </div>
 
 <script>
@@ -334,12 +677,19 @@
   const LEARNING_API = API_BASE + "?view=learning";
   const WI_API = (proc)=> API_BASE + "?view=wi&process=" + encodeURIComponent(proc);
 
-  const procMap = {"1":"ผสมเปียก","2":"แร่งเปียก","3":"อบลมร้อน","4":"แร่งแห้ง","5":"ผสมแห้ง","6":"ตอกเม็ดยา","7":"บรรจุซอง"};
+  const procMap = {
+    "1":"ผสมเปียก",
+    "2":"แร่งเปียก",
+    "3":"อบลมร้อน",
+    "4":"แร่งแห้ง",
+    "5":"ผสมแห้ง",
+    "6":"ตอกเม็ดยา",
+    "7":"บรรจุซอง"
+  };
 
   let steps = [];
   let index = 0;
   let currentProc = "1";
-
   let wiLink = "";
   let wiName = "";
 
@@ -350,9 +700,17 @@
 
   function esc(s){
     return String(s ?? "")
-      .replaceAll("&","&amp;").replaceAll("<","&lt;")
-      .replaceAll(">","&gt;").replaceAll('"',"&quot;")
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
       .replaceAll("'","&#039;");
+  }
+
+  function getStepStatus(idx){
+    if(idx < index) return "completed";
+    if(idx === index) return "active";
+    return "pending";
   }
 
   function setIndex(i){
@@ -363,39 +721,37 @@
   function render(){
     const s = steps[index];
     const total = steps.length;
+    const percent = Math.round(((index + 1) / total) * 100);
 
-    const impactProc = esc(String(s.ImpactProcess ?? "").trim()) || "-";
-    const impactDef  = esc(String(s.ImpactDefect ?? "").trim()) || "-";
-
-    const percent = total ? Math.round(((index+1)/total)*100) : 0;
+    const impactProcess = esc((s.ImpactProcess || "").trim()) || "-";
+    const impactDefect = esc((s.ImpactDefect || "").trim()) || "-";
 
     const defectBtn = (index === total - 1) ? `
       <a class="btn-defect" href="defect-learning.html?process=${encodeURIComponent(currentProc)}">
         <i class="fas fa-triangle-exclamation"></i>
-        เรียนรู้ลักษณะของเสีย 
+        เรียนรู้ลักษณะของเสีย
       </a>
     ` : ``;
 
     const wiBtnHtml = `
       <div class="wi-actions">
-        <a id="wiProcessBtn"
-           class="btn-wi ${wiLink ? "" : "disabled"}"
+        <a class="btn-wi ${wiLink ? "" : "disabled"}"
            href="${wiLink ? esc(wiLink) : "#"}"
-           target="_blank" rel="noopener">
+           target="_blank"
+           rel="noopener">
           <i class="fas fa-file-lines"></i>
-          ${wiLink
-            ? `เปิดไฟล์  ${esc(wiName || ("Process " + currentProc))}`
-            : `ยังไม่มีไฟล์ WI สำหรับ Process ${esc(currentProc)}`
-          }
+          ${wiLink ? `เปิดไฟล์ ${esc(wiName || ("Process " + currentProc))}` : `ยังไม่มีไฟล์ WI`}
         </a>
       </div>
     `;
 
     document.getElementById("content").innerHTML = `
       <div class="stage">
+
         <div class="slide">
           <div class="slide-head">
             <div class="badge">${esc(s.StepNo)}</div>
+
             <div class="head-text">
               <div class="title">${esc(s.StepTitle)}</div>
               <div class="short">${esc(s.StepShort || "")}</div>
@@ -403,6 +759,35 @@
           </div>
 
           <div class="slide-body">
+
+            <div class="process-flow-section">
+              <div class="side-section-title">
+                <i class="fas fa-diagram-project"></i>
+                Process Flow
+              </div>
+
+              <div class="flow-top-wrap">
+                <div class="flow-start">START</div>
+
+                ${steps.map((x,idx)=>`
+                  <div class="flow-arrow-inline">
+                    <i class="fas fa-arrow-right"></i>
+                  </div>
+
+                  <div class="flow-step ${getStepStatus(idx)}" data-idx="${idx}">
+                    <div class="flow-step-no">${esc(x.StepNo)}</div>
+                    <div class="flow-step-short">${esc(x.StepShort || "")}</div>
+                  </div>
+                `).join("")}
+
+                <div class="flow-arrow-inline">
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+
+                <div class="flow-end">END</div>
+              </div>
+            </div>
+
             <div class="detail">${esc(s.StepDetail || "")}</div>
 
             ${wiBtnHtml}
@@ -410,19 +795,25 @@
             <div class="hazard-frame hazard-red">
               <div class="critical">
                 <i class="fas fa-triangle-exclamation"></i>
-                <div>Critical Point:\n${esc(s.CriticalPoint || "-")}</div>
+                <div>Critical Point:
+${esc(s.CriticalPoint || "-")}</div>
               </div>
             </div>
 
             <div class="hazard-frame hazard-yellow">
               <div class="impact">
                 <i class="fas fa-share-nodes"></i>
-                <div class="impact-text">
-                  <div class="impact-title">ถ้าพลาดจะกระทบกระบวนการ</div>
-                  <div class="impact-line">${impactProc}</div>
 
-                  <div class="impact-subtitle">ทำให้เกิดของเสีย</div>
-                  <div class="impact-list">${impactDef}</div>
+                <div class="impact-text">
+                  <div class="impact-content">
+
+                    <div class="impact-heading">กระทบกระบวนการ</div>
+                    <div class="impact-value">${impactProcess}</div>
+
+                    <div class="impact-subheading">ทำให้เกิดของเสีย</div>
+                    <div class="impact-value">${impactDefect}</div>
+
+                  </div>
                 </div>
               </div>
             </div>
@@ -433,27 +824,37 @@
         <aside class="panel">
           <div class="progress">
             <div class="progress-top">
-              <div>Step ${index+1} / ${total}</div>
+              <div>Step ${index + 1} / ${total}</div>
               <div>${percent}%</div>
             </div>
-            <div class="bar"><div style="width:${percent}%"></div></div>
+
+            <div class="bar">
+              <div style="width:${percent}%"></div>
+            </div>
           </div>
 
           <div class="nav-btns">
-            <button class="btn btn-prev" id="btnPrev" ${index===0 ? "disabled":""}>
-              <i class="fas fa-arrow-left"></i> ก่อนหน้า
+            <button class="btn btn-prev" ${index === 0 ? "disabled" : ""} id="btnPrev">
+              ← ก่อนหน้า
             </button>
-            <button class="btn btn-next" id="btnNext" ${index===total-1 ? "disabled":""}>
-              ถัดไป <i class="fas fa-arrow-right"></i>
+
+            <button class="btn btn-next" ${index === total - 1 ? "disabled" : ""} id="btnNext">
+              ถัดไป →
             </button>
           </div>
 
           ${defectBtn}
 
+          <div class="side-section-title">
+            <i class="fas fa-list-check"></i>
+            Step Overview
+          </div>
+
           <div class="mini-list">
             ${steps.map((x,idx)=>`
-              <div class="mini-item ${idx===index?"active":""}" data-idx="${idx}">
+              <div class="mini-item ${getStepStatus(idx)}" data-idx="${idx}">
                 <div class="mini-no">${esc(x.StepNo)}</div>
+
                 <div>
                   <div class="mini-t">${esc(x.StepTitle)}</div>
                   <div class="mini-s">${esc(x.StepShort || "")}</div>
@@ -462,31 +863,48 @@
             `).join("")}
           </div>
         </aside>
+
       </div>
     `;
 
-    document.getElementById("btnPrev").onclick = ()=> setIndex(index-1);
-    document.getElementById("btnNext").onclick = ()=> setIndex(index+1);
+    setTimeout(() => {
+      if(index < 2) return;
 
-    document.querySelectorAll(".mini-item").forEach(el=>{
+      const activeFlow = document.querySelector(".flow-step.active");
+
+      if(activeFlow){
+        activeFlow.scrollIntoView({
+          behavior:"smooth",
+          inline:"center",
+          block:"nearest"
+        });
+      }
+    }, 50);
+
+    document.getElementById("btnPrev").onclick = () => setIndex(index - 1);
+    document.getElementById("btnNext").onclick = () => setIndex(index + 1);
+
+    document.querySelectorAll(".mini-item, .flow-step").forEach(el=>{
       el.addEventListener("click", ()=>{
-        const idx = Number(el.getAttribute("data-idx"));
+        const idx = Number(el.dataset.idx);
         if(!Number.isNaN(idx)) setIndex(idx);
       });
     });
 
     document.onkeydown = (e)=>{
-      if(e.key === "ArrowLeft") setIndex(index-1);
-      if(e.key === "ArrowRight") setIndex(index+1);
+      if(e.key === "ArrowLeft") setIndex(index - 1);
+      if(e.key === "ArrowRight") setIndex(index + 1);
     };
   }
 
   async function load(){
     const proc = String(getQueryParam("process") || "1").trim();
     currentProc = proc;
+    index = 0;
 
     document.getElementById("procTitle").textContent = `Process ${proc}`;
-    document.getElementById("procMeta").textContent  = procMap[proc] ? `กระบวนการ: ${procMap[proc]}` : "-";
+    document.getElementById("procMeta").textContent =
+      procMap[proc] ? `กระบวนการ: ${procMap[proc]}` : "-";
 
     try{
       const wiRes = await fetch(WI_API(proc));
@@ -499,7 +917,8 @@
       wiLink = wiRow?.FileURL ? String(wiRow.FileURL).trim() : "";
       wiName = wiRow?.FileName ? String(wiRow.FileName).trim() : "";
     }catch(e){
-      wiLink = ""; wiName = "";
+      wiLink = "";
+      wiName = "";
     }
 
     try{
@@ -514,14 +933,14 @@
         document.getElementById("content").innerHTML = `
           <div class="error">
             <i class="fas fa-circle-exclamation"></i>
-            <div>ไม่พบข้อมูลของ Process ${esc(proc)} ในชีท Learning Path</div>
+            <div>ไม่พบข้อมูลของ Process ${esc(proc)}</div>
           </div>
         `;
         return;
       }
 
       const startStep = Number(getQueryParam("step"));
-      if(!Number.isNaN(startStep) && startStep>0){
+      if(!Number.isNaN(startStep) && startStep > 0){
         const idx = steps.findIndex(x => Number(x.StepNo) === startStep);
         if(idx >= 0) index = idx;
       }
@@ -557,6 +976,5 @@
   }, true);
 </script>
 
-<script src="Js"></script>
 </body>
 </html>
